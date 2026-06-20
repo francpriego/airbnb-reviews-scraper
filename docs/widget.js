@@ -32,8 +32,8 @@
 .fgr-stars-yellow{display:flex;gap:2px}
 .fgr-star-y{width:20px;height:20px;fill:#FFB800}
 .fgr-review-count{font-size:15px;color:#888;font-weight:400}
-.fgr-action-btn{display:inline-flex;align-items:center;background:#2e7d32;color:#fff;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.04em;padding:12px 24px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .18s;flex-shrink:0;border:none;cursor:pointer}
-.fgr-action-btn:hover{background:#1f5c24}
+.fgr-action-btn{display:inline-flex;align-items:center;background:#2e7d32;color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.04em;padding:12px 24px;border-radius:8px;text-decoration:none!important;white-space:nowrap;transition:background .18s;flex-shrink:0;border:none!important;cursor:pointer;box-shadow:none!important}
+.fgr-action-btn:hover,.fgr-action-btn:focus,.fgr-action-btn:active{background:#1f5c24!important;color:#fff!important;box-shadow:none!important}
 .fgr-carousel-outer{position:relative;padding:0 56px}
 .fgr-carousel{display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 2px 8px}
 .fgr-carousel::-webkit-scrollbar{display:none}
@@ -73,13 +73,13 @@
 .fgr-modal-tab.is-active{color:#111;border-bottom-color:#111;font-weight:700}
 .fgr-modal-tab svg{width:13px;height:13px}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
-.fgr-modal-brand{display:flex;align-items:center;gap:6px;font-size:18px;font-weight:700;color:#111;margin-bottom:6px}
-.fgr-modal-brand svg{width:20px;height:20px;fill:#FF5A5F}
-.fgr-modal-score-row{display:flex;align-items:center;gap:8px}
-.fgr-modal-score-big{font-size:24px;font-weight:700;color:#111}
-.fgr-modal-stars{display:flex;gap:1px}
-.fgr-modal-star{width:18px;height:18px;fill:#FFB800}
-.fgr-modal-count{font-size:14px;color:#888}
+.fgr-modal-brand{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:800;color:#111;margin-bottom:10px;letter-spacing:-.01em}
+.fgr-modal-brand svg{width:28px;height:28px;fill:#FF5A5F;flex-shrink:0}
+.fgr-modal-score-row{display:flex;align-items:center;gap:10px}
+.fgr-modal-score-big{font-size:32px;font-weight:700;color:#111;line-height:1}
+.fgr-modal-stars{display:flex;gap:3px}
+.fgr-modal-star{width:24px;height:24px;fill:#FFB800}
+.fgr-modal-count{font-size:15px;color:#888}
 .fgr-modal-body{overflow-y:auto;flex:1;padding:0 24px;-webkit-overflow-scrolling:touch}
 .fgr-modal-review{display:flex;flex-direction:column;gap:10px;padding:20px 0;border-bottom:1px solid #f0f0f0}
 .fgr-modal-review:last-child{border-bottom:none}
