@@ -54,8 +54,8 @@
 .fgr-card-stars{display:flex;gap:2px}
 .fgr-card-star-y{width:16px;height:16px;fill:#FFB800}
 .fgr-card-text{font-size:13px;font-weight:300;line-height:1.65;color:#444;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-.fgr-read-more{font-size:12.5px;font-weight:600;color:#2e7d32;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;text-align:left;transition:color .18s}
-.fgr-read-more:hover{color:#1f5c24}
+.fgr-read-more{font-size:12.5px;font-weight:600;color:#2e7d32;background:none!important;border:none!important;padding:0!important;cursor:pointer;font-family:inherit;text-align:left;transition:color .18s;box-shadow:none!important;outline:none!important}
+.fgr-read-more:hover,.fgr-read-more:focus,.fgr-read-more:active{color:#2e7d32!important;background:none!important;border:none!important;box-shadow:none!important;outline:none!important}
 
 /* ── Modal ── */
 .fgr-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:24px;animation:fgrFadeIn .2s ease}
