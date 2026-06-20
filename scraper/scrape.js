@@ -143,20 +143,32 @@ async function main() {
       /**
        * Strategy: walk all text nodes / structured children.
        * Airbnb renders reviews roughly as:
-       *   <div> avatar </div>
-       *   <h3> Name </h3>
-       *   <div> "X years on Airbnb" | "City, Country" </div>
-       *   <span> "October 2024" </span>
-       *   <svg …> (stars, usually 5)
-       *   <span> review text </span>
+       *   <img>  avatar photo
+       *   <h3>   Name
+       *   <div>  "X years on Airbnb" | "City, Country"
+       *   <span> "October 2024"
+       *   <svg>  stars
+       *   <span> review text
        *
        * We also fall back to body-text line parsing if the structured approach
        * returns fewer than 6 reviews.
        */
 
-      // ── Structured extraction ─────────────────────────────────────────────
-      const cards = modal.querySelectorAll('[data-testid="review-presenter"], [aria-label*="review"], section > div > div');
+      // ── Helper: find avatar photo near a name element ─────────────────────
+      function findAvatar(nameEl) {
+        // Walk up from the name heading to find the review container,
+        // then look for an <img> with an Airbnb CDN URL
+        let node = nameEl;
+        for (let i = 0; i < 6; i++) {
+          if (!node.parentElement) break;
+          node = node.parentElement;
+          const img = node.querySelector('img[src*="muscache"], img[src*="airbnb"]');
+          if (img && img.src) return img.src;
+        }
+        return '';
+      }
 
+      // ── Structured extraction ─────────────────────────────────────────────
       const seen = new Set();
 
       function tryStructured() {
@@ -197,7 +209,8 @@ async function main() {
           const key = name + '|' + date;
           if (seen.has(key)) continue;
 
-          results.push({ name, meta, date, text: '', kids: false });
+          const photo = findAvatar(nameEl);
+          results.push({ name, meta, date, text: '', kids: false, photo });
           seen.add(key);
         }
       }
@@ -259,10 +272,24 @@ async function main() {
                 date:  date.trim(),
                 text:  text,
                 kids:  hasKids,
+                photo: '',   // filled in by DOM photo pass below
               });
             }
           }
           i++;
+        }
+      }
+
+      // ── DOM photo pass: match avatar images to each review entry ─────────
+      // Walk every h3 in the modal; if its text matches a result entry, grab
+      // the nearest <img src="*muscache*"> as the profile photo.
+      {
+        const nameEls = [...modal.querySelectorAll('h3')];
+        for (const nameEl of nameEls) {
+          const name = nameEl.textContent.trim();
+          const entry = results.find(r => r.name === name && !r.photo);
+          if (!entry) continue;
+          entry.photo = findAvatar(nameEl);
         }
       }
 

@@ -196,7 +196,17 @@
       var date    = r.date || r.d || '';
       var text    = r.text || r.t || '';
       var kids    = r.kids || false;
+      var photo   = r.photo || '';
       var metaLine = (kids ? '👨‍👩‍👧 · ' : '') + date;
+
+      // Avatar HTML: real photo if available, else coloured initial
+      var cardAvatarHtml = photo
+        ? '<img src="' + photo + '" alt="' + name + '" style="width:48px;height:48px;border-radius:50%;object-fit:cover;display:block">'
+        : '<div class="fgr-avatar" style="background:' + color + '">' + initial + '</div>';
+
+      var modalAvatarHtml = photo
+        ? '<img src="' + photo + '" alt="' + name + '" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0">'
+        : '<div class="fgr-modal-avatar" style="background:' + color + '">' + initial + '</div>';
 
       /* Carousel card */
       var card = document.createElement('div');
@@ -204,7 +214,7 @@
       card.innerHTML =
         '<div class="fgr-card-top">' +
           '<div class="fgr-avatar-wrap">' +
-            '<div class="fgr-avatar" style="background:' + color + '">' + initial + '</div>' +
+            cardAvatarHtml +
             '<div class="fgr-verified">' + CHECK + '</div>' +
           '</div>' +
           '<div>' +
@@ -228,7 +238,7 @@
       row.id = 'fgrR' + i;
       row.innerHTML =
         '<div class="fgr-modal-reviewer">' +
-          '<div class="fgr-modal-avatar" style="background:' + color + '">' + initial + '</div>' +
+          modalAvatarHtml +
           '<div>' +
             '<div class="fgr-modal-name-row">' + name + CHECK + '</div>' +
             '<div class="fgr-modal-meta">' + AIRBNB + (kids ? '👨‍👩‍👧 Stayed with kids · ' : '') + meta + '</div>' +
