@@ -53,7 +53,8 @@ async function main() {
 
     // ── 1. Open listing ───────────────────────────────────────────────────────
     log(`Opening ${LISTING_URL} ...`);
-    await page.goto(LISTING_URL, { waitUntil: 'networkidle2', timeout: 90_000 });
+    await page.goto(LISTING_URL, { waitUntil: 'domcontentloaded', timeout: 90_000 });
+    await sleep(5000); // let JS-rendered content finish loading
     await sleep(3000);
 
     // Dismiss any "translate page" or cookie banner
@@ -85,50 +86,20 @@ async function main() {
     // ── 4. Scroll modal until all reviews are loaded ──────────────────────────
     log('Scrolling modal to load all reviews...');
 
-    let prevCount  = 0;
-    let stable     = 0;
-    let totalScrolls = 0;
-
-    while (stable < STABLE_ROUNDS) {
-      // Count review items currently in the modal
-      const count = await page.evaluate(() => {
-        const modal = document.querySelector('[role="dialog"]');
-        if (!modal) return 0;
-        // Airbnb renders each review in an <li> or a div with a heading (reviewer name)
-        // We use the h3 reviewer-name headings as the count signal
-        const headings = modal.querySelectorAll('h3, [data-testid="review-presenter"]');
-        return headings.length;
-      });
-
-      log(`  Reviews loaded: ${count}  (stable rounds: ${stable}/${STABLE_ROUNDS})`);
-
-      if (count === prevCount) {
-        stable++;
-      } else {
-        stable  = 0;
-        prevCount = count;
-      }
-
-      // Scroll the modal's scrollable container
+    // Scroll the modal a fixed number of times (no h3 count — Airbnb changes DOM structure)
+    const FIXED_SCROLLS = 30;
+    for (let s = 0; s < FIXED_SCROLLS; s++) {
       await page.evaluate((step) => {
         const modal = document.querySelector('[role="dialog"]');
         if (!modal) return;
-        // Find the scrollable child (usually the first overflow-y: auto child)
         const scrollable = [...modal.querySelectorAll('*')].find(el => {
-          const s = window.getComputedStyle(el);
-          return (s.overflowY === 'auto' || s.overflowY === 'scroll') && el.scrollHeight > el.clientHeight;
+          const cs = window.getComputedStyle(el);
+          return (cs.overflowY === 'auto' || cs.overflowY === 'scroll') && el.scrollHeight > el.clientHeight;
         }) || modal;
         scrollable.scrollTop += step;
       }, SCROLL_STEP);
-
       await sleep(SCROLL_PAUSE);
-      totalScrolls++;
-
-      // Safety exit after 60 scrolls (~60 * 700px = 42 000px of scrolling)
-      if (totalScrolls > 60) {
-        log('Reached scroll limit — stopping.');
-        break;
-      }
+      log(`  Scroll ${s + 1}/${FIXED_SCROLLS}`);
     }
 
     log(`Finished scrolling. Extracting reviews...`);
@@ -154,16 +125,26 @@ async function main() {
        * returns fewer than 6 reviews.
        */
 
-      // ── Helper: find avatar photo near a name element ─────────────────────
-      function findAvatar(nameEl) {
-        // Walk up from the name heading to find the review container,
-        // then look for an <img> with an Airbnb CDN URL
-        let node = nameEl;
-        for (let i = 0; i < 6; i++) {
+      // ── Helper: find avatar photo near an element ─────────────────────────
+      function findAvatar(el) {
+        let node = el;
+        for (let i = 0; i < 8; i++) {
           if (!node.parentElement) break;
           node = node.parentElement;
-          const img = node.querySelector('img[src*="muscache"], img[src*="airbnb"]');
-          if (img && img.src) return img.src;
+          // Try any img inside this container
+          const imgs = node.querySelectorAll('img');
+          for (const img of imgs) {
+            const src = img.src || img.getAttribute('data-src') || '';
+            if (src && (src.includes('muscache') || src.includes('airbnb') || src.includes('picture'))) {
+              return src;
+            }
+            // Try srcset
+            const srcset = img.getAttribute('srcset') || '';
+            const firstSrc = srcset.split(',')[0].trim().split(' ')[0];
+            if (firstSrc && (firstSrc.includes('muscache') || firstSrc.includes('airbnb'))) {
+              return firstSrc;
+            }
+          }
         }
         return '';
       }
@@ -280,17 +261,29 @@ async function main() {
         }
       }
 
-      // ── DOM photo pass: match avatar images to each review entry ─────────
-      // Walk every h3 in the modal; if its text matches a result entry, grab
-      // the nearest <img src="*muscache*"> as the profile photo.
+      // ── DOM photo pass ────────────────────────────────────────────────────
+      // Try h3, then any element whose text exactly matches a reviewer name.
       {
-        const nameEls = [...modal.querySelectorAll('h3')];
-        for (const nameEl of nameEls) {
-          const name = nameEl.textContent.trim();
-          const entry = results.find(r => r.name === name && !r.photo);
-          if (!entry) continue;
-          entry.photo = findAvatar(nameEl);
+        const allEls = [...modal.querySelectorAll('*')];
+        for (const entry of results) {
+          if (entry.photo) continue;
+          const match = allEls.find(el =>
+            el.children.length === 0 &&
+            el.textContent.trim() === entry.name
+          );
+          if (match) entry.photo = findAvatar(match);
         }
+      }
+
+      // Last resort: grab all muscache imgs in modal order and assign sequentially
+      if (results.every(r => !r.photo)) {
+        const allImgs = [...modal.querySelectorAll('img')].filter(img => {
+          const s = img.src || '';
+          return s.includes('muscache') || s.includes('airbnb');
+        });
+        allImgs.forEach((img, i) => {
+          if (results[i]) results[i].photo = img.src;
+        });
       }
 
       // ── Fill in text for structured results ───────────────────────────────

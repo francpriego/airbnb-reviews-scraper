@@ -1,33 +1,351 @@
 {
   "listing": "https://www.airbnb.com/rooms/17517160",
-  "scraped_at": "2026-06-20T00:00:00.000Z",
-  "score": "4.93",
-  "total_count": 43,
-  "count": 24,
+  "scraped_at": "2026-06-20T19:32:18.433Z",
+  "count": 43,
   "reviews": [
-    { "name": "Jasmin",           "meta": "1 year on Airbnb",        "date": "November 2025",   "text": "Wow! This place was AMAZING! So clean, so cozy, and honestly even better than the photos. The owner was incredibly helpful and made the whole stay perfect. I'd stay here again without a second thought!", "kids": false },
-    { "name": "Happy",            "meta": "8 years on Airbnb",       "date": "October 2025",    "text": "Loved our staycation here. And the hosts were all very warm and accommodating.", "kids": false },
-    { "name": "Rosalie",          "meta": "8 years on Airbnb",       "date": "February 2025",   "text": "Tom and Rose are perfect hosts. They take time to ensure that what we need are provided. They are responsive on our requests and offered us a flexible time for check out since our flight would still be late in the afternoon. We will definitely go back to their place. We enjoyed every moment of our stay. Great hosts!", "kids": false },
-    { "name": "John",             "meta": "Springdale, Arkansas",    "date": "November 2024",   "text": "Amazing host, this was our second time staying at this Airbnb — both times were perfect. We will definitely stay here again next time in Davao City. Thomas and Rose have a great place and always keeping it nice. Thomas, Rose and Lot Lot are always friendly and kind, they keep their place so clean. If you're looking for a nice place in Davao City with a private pool don't pass on their place.", "kids": false },
-    { "name": "Kris",             "meta": "2 years on Airbnb",       "date": "October 2024",    "text": "This beautiful location was worth every penny. Jang and I felt right at home — Rose and Thomas were incredibly friendly, helpful, and easy to talk to. I will be recommending this place to every person who wishes to travel to Davao. I will certainly be returning to this place myself. Thank you so much Rose and Thomas!!", "kids": false },
-    { "name": "Leoangelo",        "meta": "Digos City, Philippines", "date": "August 2024",     "text": "Mr. Tom and Ma'am Rose are very responsive, easy to communicate with. The place is so nice — my kids love it and me and my wife love the kitchen.", "kids": true },
-    { "name": "H.",               "meta": "10 years on Airbnb",      "date": "December 2024",   "text": "Thanks for your kindness and your welcome. You have a great and beautiful home. Sure see you again.", "kids": false },
-    { "name": "Barry",            "meta": "9 years on Airbnb",       "date": "August 2023",     "text": "Home away from home 🏡 We had a lovely time at Felisa's guest house and garden house. We enjoyed it so much we invited the rest of our family to join us and extended our stay for few more nights. The place is very peaceful and great for relaxing while bonding with your family. The hosts are always there for anything. They also cater delicious breakfast and dinner. Highly recommend!", "kids": false },
-    { "name": "Lucia",            "meta": "Anaheim, California",     "date": "May 2024",        "text": "It was the perfect place for what we needed! Rosemarie, Tom and the rest of their family bent over backwards to make us feel at home and comfortable. We have recommended this place to friends and family already.", "kids": false },
-    { "name": "Mary Rose Zyra",   "meta": "7 years on Airbnb",       "date": "August 2023",     "text": "Very personalized stay. The sweet mango and the magnet is the best touch. Thank you for the great welcome.", "kids": false },
-    { "name": "David",            "meta": "10 years on Airbnb",      "date": "April 2022",      "text": "What a lovely place, central to most things in Davao. The pool is gorgeous, the WiFi is good. The property is looked after by Lot Lot and she was so friendly and could not do enough to make us welcome. Will definitely be staying here next time.", "kids": false },
-    { "name": "Genevieve Rochelle","meta": "6 years on Airbnb",      "date": "March 2021",      "text": "We were assisted very well, the food we ordered was great — all plated with generous servings. The house was clean and very comfortable. Also very convenient as it is near the highway. Thank you so much, we will be back. Lots of love for the Family ❤️", "kids": false },
-    { "name": "Evelyn A",         "meta": "San Leandro, California", "date": "February 2018",   "text": "This is a home away from home — perfect for family who loves to travel. Everything is at your fingertips, most of all the hospitality and warmth of the family who greets every guest. If you drive there is a garage you can use any time of the day.", "kids": false },
-    { "name": "Mona Fe",          "meta": "10 years on Airbnb",      "date": "February 2018",   "text": "Rosemarie's place was one of the top Airbnb houses we had so far. The host Lot-Lot who stayed next door was very accommodating and helpful — true Filipino hospitality 😊. The house is so relaxing and the pool, the kids loved it. We will definitely come back and recommend it to all our friends.", "kids": false },
-    { "name": "Dan",              "meta": "12 years on Airbnb",      "date": "October 2017",    "text": "This has been a wonderful place to stay. Everything was as described. The only thing not mentioned is the most wonderful and very kind host, who was always very helpful. It's nice and quiet, and very nice to sit outside with coffee in the morning overlooking the pool and the beautiful garden.", "kids": false },
-    { "name": "Edgar",            "meta": "10 years on Airbnb",      "date": "October 2017",    "text": "A private rest house — bigger than a 2–3 bedroom condominium. Very accommodating neighbors. Near the highway. You can swim even at night. Overall we highly recommend you and your families.", "kids": false },
-    { "name": "Carlo",            "meta": "11 years on Airbnb",      "date": "September 2022",  "text": "The house was perfect for our first family trip to the city! It's a short walk from groceries, pharmacy, and restaurants. The hosts provided everything we needed and were available at all times. It's definitely been one of our favourite holidays so far — would definitely recommend it to others!", "kids": false },
-    { "name": "Eiji",             "meta": "Manila, Philippines",     "date": "April 2022",      "text": "The place is really nice, clean and serene. The caretaker is very accommodating. Very accessible as it's near major roads.", "kids": false },
-    { "name": "William",          "meta": "Doerun, Georgia",         "date": "March 2022",      "text": "The staff are all fantastic and take excellent care and assist you any way they can. I highly recommend them — the pool is kept very clean and the location is very good. I plan to return in six months to stay again.", "kids": false },
-    { "name": "Damon",            "meta": "Laguna Beach, California","date": "November 2021",   "text": "This is our second time at Felisa's guest house. You won't be disappointed. Rosemarie and Lot Lot are so nice and will accommodate any needs. Nice safe area close to the main part of city. Very spacious, clean and the pool and garden are beautiful.", "kids": true },
-    { "name": "Alexandra",        "meta": "8 years on Airbnb",       "date": "August 2021",     "text": "The place was clean, quiet and very accessible to everything (food, transportation, pharmacy, etc). Ms Lot Lot was also very helpful and made sure we got everything we needed and were comfortable during our stay.", "kids": false },
-    { "name": "Jerry",            "meta": "Wasilla, Alaska",         "date": "June 2020",       "text": "2nd time staying and it was just as good as the last. I really appreciated the card welcoming me back.", "kids": false },
-    { "name": "Peter",            "meta": "12 years on Airbnb",      "date": "May 2019",        "text": "We had a wonderful stay — much better than I expected. Very comfortable and spacious accommodation.", "kids": false },
-    { "name": "Damon",            "meta": "Laguna Beach, California","date": "January 2019",    "text": "Wow, what an amazing place to stay. Quiet, clean, close to downtown by taxi, superb hospitality and we had the pool all to ourselves. If Lot Lot is there during your stay it's an added plus — so friendly, helpful and informative.", "kids": false }
+    {
+      "name": "Jasmin",
+      "meta": "1 year on Airbnb",
+      "date": "November 2025",
+      "text": "Wow! This place was AMAZING! So clean, so cozy, and honestly even better than the photos. The owner was incredibly helpful and made the whole stay perfect. I’d stay here again without a second thought! Response from Rosemarie Thank you so much for your kind words. We really hope you can be back again. Happy",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/1ae0f57e-f214-4422-8185-a0904289adc9.jpg?im_w=720"
+    },
+    {
+      "name": "Happy",
+      "meta": "8 years on Airbnb",
+      "date": "October 2025",
+      "text": "Loved our staycation here. And the hosts were all very warm and accommodating. Response from Rosemarie Thank you for choosing Felisa‘s Guesthouse for your family staycation. Rosalie",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/c285e7ee-b013-4d18-ac0a-493188e9abf8.jpg?im_w=720"
+    },
+    {
+      "name": "Rosalie",
+      "meta": "8 years on Airbnb",
+      "date": "February 2025",
+      "text": "Tom and Rose are perfect hosts. They take time to ensure that what we need are provided. They are responsive on our requests and offered us a flexible time for check out since our flight would still be late in the afternoon. We will definitely go back to their place. We enjoyed every moment of our stay. Great hosts… Response from Rosemarie Thanks for your kind feedback and we are looking forward to welcome you again here. John",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/User-202075718/original/59333eb2-1322-416c-a18c-8e92db8e6d9f.jpeg?im_w=720"
+    },
+    {
+      "name": "John",
+      "meta": "Springdale, Arkansas",
+      "date": "November 2024",
+      "text": "Amazing host, this was our second time staying at this Airbnb both times were perfect. We will definitely stay here again next time in Davao City. Thomas and Rose have a great place and always keeping it nice. Thomas Rose and Lot Lot are always friendly and kind, they keep their place so clean.  If you’re looking for a nice place in Davao City with a private pool don’t pass on their place. Kris",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/fa65b483-853a-476f-87d2-ed07e755c5ba.jpg?im_w=720"
+    },
+    {
+      "name": "Kris",
+      "meta": "2 years on Airbnb",
+      "date": "October 2024",
+      "text": "this beautiful location was worth every penny, Jang and I felt right at home, Rose and Thomas were incredibly friendly, helpful, and easy to talk to. I will be recommending this place to every person who wishes to travel to Davao. I will certainly be returning to this place myself. thank you so much Rose and thomas!! Response from Rosemarie Thank you so much Kris and Jang. We are looking forward to seeing you again in our place. Leoangelo",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/Portrait/Avatars/v2/orange?im_w=720&im_t=K&im_s=259&im_f=AirbnbCerealLatinMedium.ttf&im_c=8f3400&script=latin"
+    },
+    {
+      "name": "Leoangelo",
+      "meta": "Digos City, Philippines",
+      "date": "August 2024",
+      "text": ", · Stayed with kids Mr. Tom and Ma'am Rose are very responsive,  easy to communicate with,  the place is so nice, my kids love it and me and my wife likes the kitchen. Response from Rosemarie Thanks so much for your kind words and staying with us. We hope to see you soon again. ⁨H.⁩",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/User-445607642/original/0c94e7eb-1999-48f6-b36d-59fb345c7a1b.jpeg?im_w=720"
+    },
+    {
+      "name": "⁨H.⁩",
+      "meta": "10 years on Airbnb",
+      "date": "December 2024",
+      "text": "thanks for your kindness and your welcome. u have a great and beautiful home. sure sée u again Response from Rosemarie Thank you very much for your feedback. We are happy that you enjoyed your stay in our place. Barry",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/c8d6dde9-e323-40eb-ab7f-a60c78616bb3.jpg?im_w=720"
+    },
+    {
+      "name": "Barry",
+      "meta": "9 years on Airbnb",
+      "date": "August 2023",
+      "text": "Home away from home 🏡 We had a lovely time at Felisa's guest house and garden house.  We enjoyed it so much so we invited the rest of our family to join us and extended our stay for few more nights.  The place is very peaceful very go0d for relaxing time while bonding with your family.  The host are always there for anything.  They recommend a driver for airport pick up and we ended up hiring the driver for over a week . They also cater delicious breakfast and dinner,  we highly recommend this place and would love to stay here again in the future 😊. Response from Rosemarie Thank you so much Barry for your encouraging review. We really enjoyed having you as guests. Please come back soon. Lucia",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/dbcd3001-f055-40e2-af4f-7b2e864b418d.jpg?im_w=720"
+    },
+    {
+      "name": "Lucia",
+      "meta": "Anaheim, California",
+      "date": "May 2024",
+      "text": "It was the perfect place for what we needed! Rosemarie, Tom and the rest of their family bent over backwards to make us feel at home and comfortable. We have recommended this place to friends and family already. Response from Rosemarie Thank you so much for your kind words. We are looking forward to welcoming you again. Mary Rose Zyra",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/cfac5edf-fe27-4c3e-91f7-95cc3f7db2c2.jpg?im_w=720"
+    },
+    {
+      "name": "Mary Rose Zyra",
+      "meta": "7 years on Airbnb",
+      "date": "August 2023",
+      "text": "Very personalized stay. The sweet mango and the magnet is the best touch. Thank you for the great welcome. David",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/b8a408ca-f057-476c-ac85-dca34e079503.jpg?im_w=720"
+    },
+    {
+      "name": "David",
+      "meta": "10 years on Airbnb",
+      "date": "April 2022",
+      "text": "What a lovely place, its in a great location,central to most things in Davao.The pool is gorgeous,the WiFi is good,we brought an android box with us so we were able to watch Netflix etc.The property is looked after by Lot Lot and she was so friendly and could not do enough to make us welcome.Will definitely be staying here the next time we are in Davao Genevieve Rochelle",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/c805f900-7948-44c1-816d-45aa5a8ced04.jpg?im_w=720"
+    },
+    {
+      "name": "Genevieve Rochelle",
+      "meta": "6 years on Airbnb",
+      "date": "March 2021",
+      "text": "We were assisted very well, the food we ordered we're great all are plated with generous servings. The house was clean and very comfortable for all our needs since we used it for a business travel. Also very convenient as it is near the highway. Thank you so much we will be back. Lots of love for the Family ❤️ Evelyn A",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/236827b4-ad04-40b7-a852-afc573433a46.jpg?im_w=720"
+    },
+    {
+      "name": "Evelyn A",
+      "meta": "San Leandro, California",
+      "date": "February 2018",
+      "text": "This is a home away from home- perfect for family who loves to travel- everything is at your fingertips - most of all the hospitality and warmth ambiance of the family who greets every guest - if you drive there is a garage you can use and no problem what time of the day because they will provide the space you need Mona Fe",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/057a436a-2195-41a7-ab65-ef3b0517b5b1.jpg?im_w=720"
+    },
+    {
+      "name": "Mona Fe",
+      "meta": "10 years on Airbnb",
+      "date": "February 2018",
+      "text": "Rosemarie’s place was one of the top airbnb house that we had so far. The host Lot-Lot who stayed next door was very accomodating and helpful to us a true Filipino hospitality. 😊 the house is so relaxing and the pool the kids loves it. We will definitely come back and recommend it to all my friends. Thank you for making our short vacation more memorable. Dan",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/a5069794-3a1f-4069-9fb6-5cf53a38005e.jpg?im_w=720"
+    },
+    {
+      "name": "Dan",
+      "meta": "12 years on Airbnb",
+      "date": "October 2017",
+      "text": "This have been a wonderful place to stay. Everything have been as the description on airbnd. The only thing not mentioned is the most wonderful and very kind host, who was always very helpfull. It easy fit 5 people and it's nice and quite, and it's very nice to sit outside, with the coffee in the morning, overlooking the pool and the very nice garden. The pool is very nice to use and it is very clean, like the garden and surroundings. Edgar",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/a024717d-6a61-441f-9d2a-3abaa37db30f.jpg?im_w=720"
+    },
+    {
+      "name": "Edgar",
+      "meta": "10 years on Airbnb",
+      "date": "October 2017",
+      "text": "A private rest house. Bigger than 2bedroom or 3Bedroom Condominium. You can easily call Grab taxi or they call taxi service at the same rate. Very accommodating neighbors. Near Highway. You can swim even at night just be quet so that you can disturb neighbors. Overall we recommend you and your families. Carlo",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/c781bd85-fb95-49ca-a28e-6e8f97577c3b.jpg?im_w=720"
+    },
+    {
+      "name": "Carlo",
+      "meta": "11 years on Airbnb",
+      "date": "September 2022",
+      "text": "The house was perfect for our first family trip to the city! Its a short walk from groceries, pharmacy, and restaurants. It’s also near the main street, so you can just hail a cab or a jeepney and you are minutes away from the heart of Davao City. The hosts provided everything we needed and were available at all times to answer our questions very quickly. It’s definitely been one of our favourite holidays so far, and would definitely recommend it to others! Eiji",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/aa2f454e-2673-4fc8-9f26-18c3aaa6651d.jpg?im_w=720"
+    },
+    {
+      "name": "Eiji",
+      "meta": "Manila, Philippines",
+      "date": "April 2022",
+      "text": "The place is really nice, clean and serene. Caretaker is very accommodating. The place is very accessible for me. Just near Jollibee and seven-eleven. Also, the place is secure and safe. William",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/817e00b4-66dc-4262-8b2b-8cf5320ce2da.jpg?im_w=720"
+    },
+    {
+      "name": "William",
+      "meta": "Doerun, Georgia",
+      "date": "March 2022",
+      "text": "The staff are all fantastic and take excellent care and assist you any way they can , I highly recommend them , the pool is kept very clean and the location is very good . I plan to return in six months to stay again . Damon",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/7ebd70c3-1e61-4e2c-b212-e1cff3f342e4.jpg?im_w=720"
+    },
+    {
+      "name": "Damon",
+      "meta": "Laguna Beach, California",
+      "date": "November 2021",
+      "text": ", · Stayed with kids This is our second time at Felicias guest house. You won’t be disappointed. Rosemarie and Lot Lot are so nice and will accommodate you with any needs. Nice safe area that’s close to the main part of city. Very spacious, clean and the pool and garden are beautiful. Alexandra",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/56a7819a-4442-4925-8904-6c27d5ae5ad2.jpg?im_w=720"
+    },
+    {
+      "name": "Alexandra",
+      "meta": "8 years on Airbnb",
+      "date": "August 2021",
+      "text": "The place was clean, quiet and very accessible to everything (food, transportation, pharmacy, etc). Ms Lot lot was also very helpful and made sure we got everything we need and that were comfortable during our stay. We very much enjoyed our stay and will definitely come back soon! Jerry",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/c9c5ad14-1465-4585-9267-f079493aee5c.jpg?im_w=720"
+    },
+    {
+      "name": "Jerry",
+      "meta": "Wasilla, Alaska",
+      "date": "June 2020",
+      "text": "2nd time staying and it was just as good as the last. I really appreciated the card welcoming me back. It was a pleasant surprise and it's the little things like these to me that make a big impact. Peter",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/b706752e-a6c9-4edb-a1f6-1ac1932d4959.jpg?im_w=720"
+    },
+    {
+      "name": "Peter",
+      "meta": "12 years on Airbnb",
+      "date": "May 2019",
+      "text": "We had a wonderful stay. Much much better than i expected. Very comfortable and spacious accommodation. Everything was quality about the house. The beds were very comfortable too. Extremely good air con in the bedrooms with a lovely ceiling fan in the open plan kitchen/dining/lounge. The jewel in the crown is the lovely clean swimming pool surrounded by landscaped garden. Also has pool lights for a dip in the evenings. Plenty of shops nearby and also a nice Jollibee a few minutes walk away. I thoroughly recommend this place. Damon",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/69534814-946d-44ae-be4b-db9f0a6020a8.jpg?im_w=720"
+    },
+    {
+      "name": "Damon",
+      "meta": "Laguna Beach, California",
+      "date": "January 2019",
+      "text": "Wow, what an amazing place to stay. Quiet, clean, close to down town by taxi, superb hospitality and we had the pool all to our selves. If Lot Lot is there during your stay it’s an added plus. So friendly, helpful and informative. Thanks so much😉 Antonio",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/56a7819a-4442-4925-8904-6c27d5ae5ad2.jpg?im_w=720"
+    },
+    {
+      "name": "Antonio",
+      "meta": "11 years on Airbnb",
+      "date": "September 2017",
+      "text": "The house is not new but it's not very old either. Very clean inside and out. The street going inside and the parking space is a little tight though but our overall stay was perfect. I would recommend this place for a family or group stay considering it will fit 5 persons easily. Linyanling",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/214dea20-3b77-46fc-85ac-2581e977a939.jpg?im_w=720"
+    },
+    {
+      "name": "Linyanling",
+      "meta": "9 years on Airbnb",
+      "date": "April 2017",
+      "text": "Very good place to stay in. The swimming pool is excellent and it was refreshed for us. The air conditioners are quiet. Rosemarie and her family are nice and welcoming. They helped us lots. Frédéric",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/f18c0fe3-10f6-4893-9ab3-3bcbd8d27ad3.jpg?im_w=720"
+    },
+    {
+      "name": "Frédéric",
+      "meta": "13 years on Airbnb",
+      "date": "May 2024",
+      "text": "We had a great time in this cozy, clean and where nothing is missing. The pool was very nice. The owners were very attentive to us. We highly recommend their breakfast, the local fruits are a delight. Mae",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/User/original/72c66080-fd9e-4294-b684-0c8241f95a9c.jpeg?im_w=720"
+    },
+    {
+      "name": "Mae",
+      "meta": "Kingston, Canada",
+      "date": "November 2018",
+      "text": ", · Group trip Booked this place to chill and bond with my family and it was definitely a perfect choice. Place is spotless, very clean and tidy. Location is accessible for food and transportation. neighborhood is very quiet, pool is clean and house is breezy, truly a perfect place to relax and unwind. Many thanks to Rosemarie's sister Lot-lot for the warm welcome, she's very sweet and accommodating. And to add to all of these superbness, hosts Rosemarie and Thomas were so thoughtful for placing a welcome card and basket of fruits for us. There's nothing i can say but all good things in this place. I highly recommend Felisa's guesthouse and will definitely come back. Jonilie",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/6998f5d9-44e3-4617-8498-830c562a3e02.jpg?im_w=720"
+    },
+    {
+      "name": "Jonilie",
+      "meta": "8 years on Airbnb",
+      "date": "April 2018",
+      "text": "My family loved this place! What could not be captured in the photos, which I would like to mention, are the sense of bright living areas, big rooms, and quiet neighborhood. Swimming pool is always kept clean and we always enjoyed swimming. If you intend to cook, the kitchen is equipped with induction cooktop, microwave with convection oven, kettle, fridge, crockery and cutleries. I would suggest some microwaveable dishes, though, in case you want to reheat some food. If cooking is not your style, the area is close to Jollibee (every balikbayan would not miss this on the checklist). Or better yet, ask Rosemarie’s mom, to cook for you (they do catering), they make delicious food, too! Amy",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/Portrait/Avatars/v2/magenta?im_w=720&im_t=J&im_s=259&im_f=AirbnbCerealLatinMedium.ttf&im_c=901e7c&script=latin"
+    },
+    {
+      "name": "Amy",
+      "meta": "Davao City, Philippines",
+      "date": "August 2020",
+      "text": ", · Stayed with kids This is a great option to stay with a family as there is a pool, kitchen and 2 bedrooms.   The are very hospitable and the place is clean :) Douglas",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/0161ed83-4bac-4c21-83fa-d5d259a4c3be.jpg?im_w=720"
+    },
+    {
+      "name": "Douglas",
+      "meta": "Ottawa, Canada",
+      "date": "November 2019",
+      "text": "Nice accommodations & pool well maintained! Hosts friendly & willingly provide any information about Davao & area.  Great experience! Dan",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/70b00aaa-bba2-4468-a115-7c70e6b94686.jpg?im_w=720"
+    },
+    {
+      "name": "Dan",
+      "meta": "12 years on Airbnb",
+      "date": "May 2018",
+      "text": "It was nice and clean and private, we enjoyed the pool very much, and the quite nabo hood, and the local food. Karl",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/a024717d-6a61-441f-9d2a-3abaa37db30f.jpg?im_w=720"
+    },
+    {
+      "name": "Karl",
+      "meta": "Yokohama, Japan",
+      "date": "March 2018",
+      "text": ", · Group trip This was an exceptional home in the heart of Davao city. The host, Lotlot (sister of the host) is such a warm-hearted person and the entire experience, from booking with Rosemarie and Thomas, to special requests, to arriving late due to plane delays, helping with local info, right to our departure was a kind, seamless, value-for money experience. The flat had everything we needed, was clean, cool, safe, private yet friendly help was readily available and nearby, wifi was speedy, the pool: EXCELLENT, complete satisfaction guaranteed. The location is a 2 minute walk from local shops (Jolibee too) and a P150 ride to the nearest SM mall. Its only a short taxi ride from the airport also. I not only recommend anyone staying in Davao to stay here but I will definitely be staying here next time I visit with my family. Sadie",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/b6a8a54e-e5f6-4ceb-b39a-ad9f75fe6bef.jpg?im_w=720"
+    },
+    {
+      "name": "Sadie",
+      "meta": "9 years on Airbnb",
+      "date": "August 2017",
+      "text": "We were greeted so warmly upon our arrival in Davao by Rosemarie's sister. In preparation for our arrival the guesthouse, little gestures were placed in the house to welcome us - a plant, fruit and a card. The pictures on the internet enticed me to book, but they actually don't do the guesthouse justice. It is cozy, warm and welcoming. The pool and garden feel like a small retreat within the city and it was so wonderful to wake and hear the birds singing. The family took us in with such kindness. They went out of their way to answer every question and took steps to ensure our stay was comfortable. Rosemarie and her husband, Thomas were so easy to talk to and it made our stay so much more stress free. The house has two large bedrooms with tasteful furnishings and quiet aircons. The kitchen, dinning room and living room is in studio style with a great view to the pool and mini oasis garden. The furniture is comfortable, clean and balances with the decor of the house. The location is ideal. It is a short trip to the city centre and not in a part of town that is heavily congested with traffic. It is just off a main street but in a cosy neighborhood that you don't hear the hustle and bustle of the city. My daughters enjoyed the pool immensely and spent many hours playing in it. It was always clean and well maintained which made it even more enticing to cool down after a hot day. For anyone looking for a cosy house in Davao, I would highly recommend this guesthouse. John",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/a5b8e8d1-e59f-4bc8-bada-bc9a6d4cce9d.jpg?im_w=720"
+    },
+    {
+      "name": "John",
+      "meta": "Springdale, Arkansas",
+      "date": "October 2019",
+      "text": "Wonderful place to stay, house and pool were awesome. Very easy to communicate with. Mary",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/fa65b483-853a-476f-87d2-ed07e755c5ba.jpg?im_w=720"
+    },
+    {
+      "name": "Mary",
+      "meta": "Fond du Lac, Wisconsin",
+      "date": "June 2018",
+      "text": "The guesthouse and everything was what I expected and more.  We will definitely use the guesthouse on our return visits Kristeen",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/d0a8e464-670d-4c55-be3e-789fb4be876a.jpg?im_w=720"
+    },
+    {
+      "name": "Kristeen",
+      "meta": "8 years on Airbnb",
+      "date": "May 2019",
+      "text": "The house is clean and oweners are cery hospitable!❤️ Niko",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/2f317be4-d971-4512-8842-6ddee50fdb58.jpg?im_w=720"
+    },
+    {
+      "name": "Niko",
+      "meta": "9 years on Airbnb",
+      "date": "June 2018",
+      "text": "Awsome Hosts, awsome House. I will defenetly come back! 5/5 Jerry",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/84297c02-bec2-40d0-8e83-2f11ff8c24bd.jpg?im_w=720"
+    },
+    {
+      "name": "Jerry",
+      "meta": "Wasilla, Alaska",
+      "date": "August 2021",
+      "text": "Expect a quite place to relax and enjoy ur stay. Ralf",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/b706752e-a6c9-4edb-a1f6-1ac1932d4959.jpg?im_w=720"
+    },
+    {
+      "name": "Ralf",
+      "meta": "7 years on Airbnb",
+      "date": "October 2019",
+      "text": "Very nice house with large pool and spacious rooms. Unfortunately, we missed the TV, but it is also not listed in the description. You have your peace and quiet here and can sleep well thanks to the bedrooms with good aircon. The host family on site was very nice and always helpful with all concerns. We will be happy to come back. Jc",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/423b0268-8e56-46ff-831f-bebeafd71b28.jpg?im_w=720"
+    },
+    {
+      "name": "Jc",
+      "meta": "10 years on Airbnb",
+      "date": "July 2022",
+      "text": "good places for family Tony",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/eba9bb4c-f5bb-460d-bfe2-aeaf17bf83b8.jpg?im_w=720"
+    },
+    {
+      "name": "Tony",
+      "meta": "East Alton, Illinois",
+      "date": "March 2022",
+      "text": "very buitiful home Marek",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/pictures/user/b564cd9c-6911-401a-ba78-71b8c43746d6.jpg?im_w=720"
+    },
+    {
+      "name": "Marek",
+      "meta": "11 years on Airbnb",
+      "date": "April 2019",
+      "text": "Big house with nice pool.",
+      "kids": false,
+      "photo": "https://a0.muscache.com/im/users/34364829/profile_pic/1432743784/original.jpg?im_w=720"
+    }
   ]
 }
