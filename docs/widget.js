@@ -107,7 +107,7 @@
   document.head.appendChild(style);
 
   /* ── SVGs ────────────────────────────────────────────────────────────────── */
-  var AIRBNB = '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>';
+  var AIRBNB = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
   var CHECK  = '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#00b4d8"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
   var CSTAR  = '<svg class="fgr-card-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
   var HSTAR  = '<svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
