@@ -1,0 +1,595 @@
+<!-- ============================================================
+     Airbnb Reviews Widget — Elementor HTML Widget
+     ============================================================ -->
+<style>
+.fgr-wrap *,
+.fgr-wrap *::before,
+.fgr-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.fgr-wrap {
+  width: 100%;
+  background: #f5f3ee;
+  font-family: 'Libre Franklin', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 0 48px;
+}
+
+/* ── Tab bar ─────────────────────────────── */
+.fgr-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0 40px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.fgr-tabs::-webkit-scrollbar { display: none; }
+
+.fgr-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.18s, border-color 0.18s;
+  margin-bottom: -1px;
+}
+.fgr-tab:hover { color: #333; }
+.fgr-tab.is-active { color: #111; border-bottom-color: #111; font-weight: 600; }
+.fgr-tab svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* ── Header block ───────────────────────── */
+.fgr-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 28px 40px 24px;
+  background: #fff;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.fgr-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+.fgr-brand svg { width: 24px; height: 24px; fill: #FF5A5F; flex-shrink: 0; }
+
+.fgr-score-row { display: flex; align-items: center; gap: 8px; }
+.fgr-score-big { font-size: 28px; font-weight: 700; color: #111; line-height: 1; }
+.fgr-stars-yellow { display: flex; gap: 2px; }
+.fgr-star-y { width: 20px; height: 20px; fill: #FFB800; }
+.fgr-review-count { font-size: 15px; color: #888; font-weight: 400; }
+
+.fgr-write-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #2e7d32;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+.fgr-write-btn:hover { background: #1f5c24; }
+
+/* ── Carousel wrapper ───────────────────── */
+.fgr-carousel-outer {
+  position: relative;
+  padding: 0 56px;
+}
+
+.fgr-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 2px 8px;
+}
+.fgr-carousel::-webkit-scrollbar { display: none; }
+
+/* ── Nav arrows ─────────────────────────── */
+.fgr-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: box-shadow 0.18s, background 0.18s;
+}
+.fgr-nav:hover { background: #f5f5f5; box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+.fgr-nav svg { width: 18px; height: 18px; stroke: #333; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fgr-nav-prev { left: 0; }
+.fgr-nav-next { right: 0; }
+.fgr-nav:disabled { opacity: 0.35; cursor: default; }
+
+/* ── Review card ────────────────────────── */
+.fgr-card {
+  flex: 0 0 280px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.fgr-card-top { display: flex; align-items: flex-start; gap: 12px; }
+.fgr-avatar-wrap { position: relative; flex-shrink: 0; }
+.fgr-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff;
+}
+.fgr-verified {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 18px; height: 18px; background: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.fgr-verified svg { width: 16px; height: 16px; }
+.fgr-reviewer-name { font-size: 14px; font-weight: 700; color: #111; line-height: 1.2; }
+.fgr-reviewer-source {
+  display: flex; align-items: center; gap: 5px; margin-top: 4px;
+  font-size: 11.5px; color: #888;
+}
+.fgr-reviewer-source svg { width: 13px; height: 13px; fill: #FF5A5F; flex-shrink: 0; }
+
+.fgr-card-stars { display: flex; gap: 2px; }
+.fgr-card-star-y { width: 16px; height: 16px; fill: #FFB800; }
+
+.fgr-card-text {
+  font-size: 13px; font-weight: 300; line-height: 1.65; color: #444;
+  display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;
+  overflow: hidden; flex: 1;
+}
+
+.fgr-read-more {
+  font-size: 12.5px; font-weight: 600; color: #2e7d32;
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-family: inherit; text-align: left; transition: color 0.18s;
+}
+.fgr-read-more:hover { color: #1f5c24; }
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+.fgr-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fgrFadeIn 0.2s ease;
+}
+.fgr-modal-overlay.is-open { display: flex; }
+
+@keyframes fgrFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.fgr-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  animation: fgrSlideUp 0.25s ease;
+}
+@keyframes fgrSlideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Modal top bar */
+.fgr-modal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8e8e8;
+  flex-shrink: 0;
+}
+.fgr-modal-back {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: none; border: 1px solid #ddd;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.18s;
+}
+.fgr-modal-back:hover { background: #f5f5f5; }
+.fgr-modal-back svg { width: 18px; height: 18px; stroke: #333; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Modal tab bar */
+.fgr-modal-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+}
+.fgr-modal-tabs::-webkit-scrollbar { display: none; }
+.fgr-modal-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.18s, border-color 0.18s;
+  flex-shrink: 0;
+}
+.fgr-modal-tab.is-active { color: #111; border-bottom-color: #111; font-weight: 700; }
+.fgr-modal-tab svg { width: 13px; height: 13px; }
+
+/* Modal header */
+.fgr-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  flex-shrink: 0;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #f0f0f0;
+}
+.fgr-modal-brand {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 18px; font-weight: 700; color: #111; margin-bottom: 6px;
+}
+.fgr-modal-brand svg { width: 20px; height: 20px; fill: #FF5A5F; }
+.fgr-modal-score-row { display: flex; align-items: center; gap: 8px; }
+.fgr-modal-score-big { font-size: 24px; font-weight: 700; color: #111; }
+.fgr-modal-stars { display: flex; gap: 1px; }
+.fgr-modal-star { width: 18px; height: 18px; fill: #FFB800; }
+.fgr-modal-count { font-size: 14px; color: #888; }
+
+/* Modal body (scrollable) */
+.fgr-modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Modal review row */
+.fgr-modal-review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.fgr-modal-review:last-child { border-bottom: none; }
+
+.fgr-modal-reviewer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.fgr-modal-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.fgr-modal-reviewer-info { display: flex; flex-direction: column; gap: 2px; }
+.fgr-modal-reviewer-name-row {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 14px; font-weight: 700; color: #111;
+}
+.fgr-modal-reviewer-name-row svg { width: 16px; height: 16px; }
+.fgr-modal-reviewer-meta {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: #888;
+}
+.fgr-modal-reviewer-meta svg { width: 12px; height: 12px; fill: #FF5A5F; }
+
+.fgr-modal-review-stars { display: flex; gap: 2px; }
+.fgr-modal-review-star { width: 14px; height: 14px; fill: #FFB800; }
+
+.fgr-modal-review-text {
+  font-size: 13.5px; font-weight: 300; line-height: 1.7; color: #333;
+}
+
+/* Close button */
+.fgr-modal-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: none; border: 1px solid #ddd;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 18px; color: #444;
+  transition: background 0.18s; flex-shrink: 0;
+  font-family: inherit;
+}
+.fgr-modal-close:hover { background: #f5f5f5; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 640px) {
+  .fgr-tabs { padding: 0 16px; }
+  .fgr-header { padding: 20px 16px 18px; }
+  .fgr-carousel-outer { padding: 0 16px; }
+  .fgr-card { flex: 0 0 240px; }
+  .fgr-nav { display: none; }
+  .fgr-modal-overlay { padding: 0; align-items: flex-end; }
+  .fgr-modal { border-radius: 16px 16px 0 0; max-height: 92vh; }
+}
+</style>
+
+<div class="fgr-wrap">
+
+  <!-- ── Tab bar ─────────────────────── -->
+  <div class="fgr-tabs">
+    <button class="fgr-tab is-active">
+      All Reviews <span style="font-weight:700">4.93</span>
+    </button>
+    <button class="fgr-tab">
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>
+      Guesthouse <span style="font-weight:700">4.93</span>
+    </button>
+  </div>
+
+  <!-- ── Header ──────────────────────── -->
+  <div class="fgr-header">
+    <div>
+      <div class="fgr-brand">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>
+        airbnb Reviews
+      </div>
+      <div class="fgr-score-row">
+        <span class="fgr-score-big">4.93</span>
+        <div class="fgr-stars-yellow">
+          <svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span class="fgr-review-count">(43)</span>
+      </div>
+    </div>
+    <button class="fgr-write-btn" onclick="fgrOpenModal(0)">Read all 43 reviews</button>
+  </div>
+
+  <!-- ── Carousel ─────────────────────── -->
+  <div class="fgr-carousel-outer">
+    <button class="fgr-nav fgr-nav-prev" id="fgrPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="fgr-carousel" id="fgrCarousel"></div>
+    <button class="fgr-nav fgr-nav-next" id="fgrNext" aria-label="Next">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODAL
+══════════════════════════════════════════ -->
+<div class="fgr-modal-overlay" id="fgrModalOverlay" role="dialog" aria-modal="true" aria-label="All reviews">
+
+  <div class="fgr-modal">
+
+    <!-- Top bar: back + close -->
+    <div class="fgr-modal-topbar">
+      <button class="fgr-modal-back" onclick="fgrCloseModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <!-- Tab bar inside modal -->
+      <div class="fgr-modal-tabs" style="flex:1;overflow-x:auto">
+        <button class="fgr-modal-tab is-active">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>
+          Guesthouse <strong>4.93</strong>
+        </button>
+      </div>
+
+      <button class="fgr-modal-close" onclick="fgrCloseModal()" aria-label="Close">&#10005;</button>
+    </div>
+
+    <!-- Header inside modal -->
+    <div class="fgr-modal-header">
+      <div>
+        <div class="fgr-modal-brand">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>
+          airbnb Reviews
+        </div>
+        <div class="fgr-modal-score-row">
+          <span class="fgr-modal-score-big">4.93</span>
+          <div class="fgr-modal-stars">
+            <svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span class="fgr-modal-count">(43)</span>
+        </div>
+      </div>
+      <a href="https://www.airbnb.ca/rooms/17517160" target="_blank" rel="noopener" class="fgr-write-btn" style="font-size:12px;padding:10px 18px">
+        Write a Review
+      </a>
+    </div>
+
+    <!-- Scrollable review list -->
+    <div class="fgr-modal-body" id="fgrModalBody"></div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var COLORS  = ['#2e7d32','#1f5c24','#388e3c','#2e7d32','#1a6b1e','#4caf50'];
+  var AIRBNB_SVG = '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#FF5A5F" d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 4c1.86 0 3.37 1.51 3.37 3.37S17.86 11.74 16 11.74 12.63 10.23 12.63 8.37 14.14 5 16 5zm8.25 18.75c-.16.22-.42.35-.69.35H8.44c-.27 0-.53-.13-.69-.35-.16-.22-.19-.5-.09-.75l1.5-4c.74-1.97 2.63-3.29 4.72-3.29h4.24c2.09 0 3.98 1.32 4.72 3.29l1.5 4c.1.25.07.53-.09.75z"/></svg>';
+  var CHECK_SVG  = '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#00b4d8"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+  var CSTAR_SVG  = '<svg class="fgr-card-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+  var MSTAR_SVG  = '<svg class="fgr-modal-review-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+
+  var REVIEWS_URL = 'https://francpriego.github.io/airbnb-reviews-scraper/reviews.json';
+
+  function buildCards(reviews) {
+    var carousel  = document.getElementById('fgrCarousel');
+    var modalBody = document.getElementById('fgrModalBody');
+
+    reviews.forEach(function (r, i) {
+      var color   = COLORS[i % COLORS.length];
+      var name    = r.name || r.n || '';
+      var meta    = r.meta || r.m || '';
+      var date    = r.date || r.d || '';
+      var text    = r.text || r.t || '';
+      var kids    = r.kids || false;
+      var photo   = r.photo || '';
+      var initial = name.charAt(0).toUpperCase();
+      var metaLine = (kids ? '👨‍👩‍👧 · ' : '') + date;
+
+      var cardAvatar = photo
+        ? '<img src="' + photo + '" alt="' + name + '" style="width:48px;height:48px;border-radius:50%;object-fit:cover;display:block">'
+        : '<div class="fgr-avatar" style="background:' + color + '">' + initial + '</div>';
+
+      var modalAvatar = photo
+        ? '<img src="' + photo + '" alt="' + name + '" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0">'
+        : '<div class="fgr-modal-avatar" style="background:' + color + '">' + initial + '</div>';
+
+      /* Carousel card */
+      var card = document.createElement('div');
+      card.className = 'fgr-card';
+      card.innerHTML =
+        '<div class="fgr-card-top">' +
+          '<div class="fgr-avatar-wrap">' +
+            cardAvatar +
+            '<div class="fgr-verified">' + CHECK_SVG + '</div>' +
+          '</div>' +
+          '<div>' +
+            '<div class="fgr-reviewer-name">' + name + '</div>' +
+            '<div class="fgr-reviewer-source">' + AIRBNB_SVG + metaLine + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="fgr-card-stars">' + CSTAR_SVG.repeat(5) + '</div>' +
+        '<p class="fgr-card-text">' + text + '</p>' +
+        '<button class="fgr-read-more" data-idx="' + i + '">Read more</button>';
+
+      card.querySelector('.fgr-read-more').addEventListener('click', function () {
+        fgrOpenModal(parseInt(this.getAttribute('data-idx')));
+      });
+      carousel.appendChild(card);
+
+      /* Modal review row */
+      var row = document.createElement('div');
+      row.className = 'fgr-modal-review';
+      row.id = 'fgrMR' + i;
+      row.innerHTML =
+        '<div class="fgr-modal-reviewer">' +
+          modalAvatar +
+          '<div class="fgr-modal-reviewer-info">' +
+            '<div class="fgr-modal-reviewer-name-row">' + name + CHECK_SVG + '</div>' +
+            '<div class="fgr-modal-reviewer-meta">' + AIRBNB_SVG + (kids ? '👨‍👩‍👧 Stayed with kids · ' : '') + meta + '</div>' +
+            '<div style="font-size:11px;color:#aaa;margin-top:2px">' + date + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="fgr-modal-review-stars">' + MSTAR_SVG.repeat(5) + '</div>' +
+        '<p class="fgr-modal-review-text">' + text + '</p>';
+
+      modalBody.appendChild(row);
+    });
+  }
+
+  /* ── Fetch reviews from GitHub Pages ──────────── */
+  fetch(REVIEWS_URL)
+    .then(function (r) { return r.json(); })
+    .then(function (data) { buildCards(data.reviews || []); })
+    .catch(function () {
+      /* fallback: build empty state */
+      document.getElementById('fgrCarousel').innerHTML =
+        '<p style="padding:20px;color:#888;font-size:13px">Reviews temporarily unavailable.</p>';
+    });
+
+  /* ── Carousel arrows ───────────────────────────── */
+  var prev  = document.getElementById('fgrPrev');
+  var next  = document.getElementById('fgrNext');
+  var cardW = 280 + 16;
+
+  function updateBtns() {
+    prev.disabled = carousel.scrollLeft <= 4;
+    next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 4;
+  }
+
+  prev.addEventListener('click', function () { carousel.scrollBy({ left: -cardW * 2, behavior: 'smooth' }); });
+  next.addEventListener('click', function () { carousel.scrollBy({ left:  cardW * 2, behavior: 'smooth' }); });
+  carousel.addEventListener('scroll', updateBtns);
+  updateBtns();
+
+  /* ── Modal open/close ──────────────────────────── */
+  var overlay = document.getElementById('fgrModalOverlay');
+
+  window.fgrOpenModal = function (idx) {
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    // Scroll modal to the clicked review
+    setTimeout(function () {
+      var target = document.getElementById('fgrMR' + idx);
+      if (target) target.scrollIntoView({ block: 'start' });
+      else modalBody.scrollTop = 0;
+    }, 50);
+  };
+
+  window.fgrCloseModal = function () {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  // Close on overlay click
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) fgrCloseModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') fgrCloseModal();
+  });
+
+})();
+</script>
