@@ -246,7 +246,6 @@
         '<div class="fgr-overlay" id="' + prefix + 'Overlay" role="dialog" aria-modal="true">' +
           '<div class="fgr-modal">' +
             '<div class="fgr-modal-topbar">' +
-              '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close" aria-label="Close">' + BACK + '</button>' +
               '<div class="fgr-modal-tabs">' +
                 '<button class="fgr-modal-tab is-active">' + AIRBNB + ' ' + tabLabels[ti] + ' <strong>' + score + '</strong></button>' +
               '</div>' +
@@ -312,7 +311,6 @@
       updateBtns();
 
       panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
-      panel.querySelector('#' + prefix + 'Close').addEventListener('click', closeModal);
       panel.querySelector('#' + prefix + 'Close2').addEventListener('click', closeModal);
       overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
     });
