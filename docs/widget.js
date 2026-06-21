@@ -47,7 +47,7 @@
 .fgr-avatar-wrap{position:relative;flex-shrink:0;width:56px;height:56px}
 .fgr-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
 .fgr-avatar-wrap>img{width:56px;height:56px;border-radius:50%;object-fit:cover;display:block}
-.fgr-avatar-badge{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff}
+.fgr-avatar-badge{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
 .fgr-avatar-badge img{width:16px;height:16px;object-fit:contain;display:block}
 .fgr-reviewer-name{font-size:15px;font-weight:700;color:#111;line-height:1.2}
 .fgr-reviewer-source{display:flex;align-items:center;gap:5px;font-size:12px;color:#666}
