@@ -122,7 +122,7 @@
   var COLORS = ['#2e7d32','#1f5c24','#388e3c','#2e7d32','#1a6b1e','#4caf50'];
 
   /* ── Build review cards + modal rows for one listing ─────────────────────── */
-  function buildCards(reviews, carousel, modalBody, prefix) {
+  function buildCards(reviews, carousel, modalBody, prefix, openModal) {
     reviews.forEach(function (r, i) {
       var color   = COLORS[i % COLORS.length];
       var initial = (r.name || '?').charAt(0).toUpperCase();
@@ -274,8 +274,6 @@
       modalBodies.push(modalBody);
       overlays.push(overlay);
 
-      buildCards(reviews, carousel, modalBody, prefix);
-
       /* Carousel arrows */
       var prev  = panel.querySelector('#' + prefix + 'Prev');
       var next  = panel.querySelector('#' + prefix + 'Next');
@@ -303,6 +301,8 @@
         overlay.classList.remove('is-open');
         document.body.style.overflow = '';
       }
+
+      buildCards(reviews, carousel, modalBody, prefix, openModal);
 
       panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
       panel.querySelector('#' + prefix + 'Close').addEventListener('click', closeModal);
