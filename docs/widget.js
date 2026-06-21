@@ -309,7 +309,10 @@
 
     /* Modal tab clicks */
     modalTabBtns.forEach(function (btn, ti) {
-      btn.addEventListener('click', function () { switchModalTab(ti); });
+      btn.addEventListener('click', function () {
+        switchModalTab(ti);
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      });
     });
 
     modalCloseBtn.addEventListener('click', closeSharedModal);
@@ -396,6 +399,7 @@
         panels.forEach(function (p) { p.classList.remove('is-active'); });
         tab.classList.add('is-active');
         panels[ti].classList.add('is-active');
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       });
     });
 
