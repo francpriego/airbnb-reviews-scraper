@@ -14,7 +14,7 @@ const path        = require('path');
 puppeteer.use(Stealth());
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const LISTING_URL = process.env.AIRBNB_LISTING_URL || 'https://www.airbnb.com/rooms/17517160';
+const LISTING_URL = (process.env.AIRBNB_LISTING_URL || 'https://www.airbnb.com/rooms/17517160') + (process.env.AIRBNB_LISTING_URL && !process.env.AIRBNB_LISTING_URL.includes('locale') ? '?locale=en' : '');
 const OUT_DIR     = path.join(__dirname, '..', 'docs');
 const OUT_FILE    = path.join(OUT_DIR, process.env.OUT_FILE || 'reviews.json');
 
@@ -33,7 +33,7 @@ async function main() {
 
   const browser = await puppeteer.launch({
     headless: 'new',
-    protocolTimeout: 60_000,
+    protocolTimeout: 180_000,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -58,57 +58,68 @@ async function main() {
     await sleep(5000); // let JS-rendered content finish loading
     await sleep(3000);
 
-    // Dismiss any "translate page" or cookie banner
+    // Dismiss cookie banner and translation popup using fast XPath queries
+    try {
+      const [cookieBtn] = await page.$x("//button[contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'only necessary') or contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'accept all')]");
+      if (cookieBtn) { await cookieBtn.click(); await sleep(800); }
+    } catch (_) {}
+
     await page.keyboard.press('Escape');
     await sleep(500);
+
+    try {
+      const [closeBtn] = await page.$x("//button[@aria-label='Close' or @aria-label='close' or @aria-label='Dismiss']");
+      if (closeBtn) { await closeBtn.click(); await sleep(500); }
+    } catch (_) {}
 
     // ── 2. Find & click "Show all X reviews" ─────────────────────────────────
     log('Looking for "Show all reviews" button...');
 
-    const showAllBtn = await page.evaluateHandle(() => {
-      const btns = [...document.querySelectorAll('button')];
-      return btns.find(b => /show all \d+ review/i.test(b.textContent));
-    });
+    const [showAllBtn] = await page.$x("//button[contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'show all') and contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'review')]");
 
-    if (!showAllBtn || !(await showAllBtn.evaluate(el => el instanceof HTMLElement))) {
-      throw new Error('Could not find "Show all reviews" button. Airbnb may have changed their layout.');
-    }
+    const hasModal = !!showAllBtn;
 
-    await showAllBtn.evaluate(el => el.scrollIntoView({ block: 'center' }));
-    await sleep(500);
-    await showAllBtn.click();
-    log('Clicked "Show all reviews". Waiting for modal...');
-    await sleep(2500);
+    if (hasModal) {
+      await showAllBtn.evaluate(el => el.scrollIntoView({ block: 'center' }));
+      await sleep(500);
+      await showAllBtn.click();
+      log('Clicked "Show all reviews". Waiting for modal...');
+      await sleep(2500);
 
-    // ── 3. Wait for modal ─────────────────────────────────────────────────────
-    await page.waitForSelector('[role="dialog"]', { timeout: 15_000 });
-    log('Modal opened.');
+      // ── 3. Wait for modal ───────────────────────────────────────────────────
+      await page.waitForSelector('[role="dialog"]', { timeout: 15_000 });
+      log('Modal opened.');
 
-    // ── 4. Scroll modal until all reviews are loaded ──────────────────────────
-    log('Scrolling modal to load all reviews...');
-
-    // Scroll the modal a fixed number of times (no h3 count — Airbnb changes DOM structure)
-    const FIXED_SCROLLS = 30;
-    for (let s = 0; s < FIXED_SCROLLS; s++) {
-      await page.evaluate((step) => {
-        const modal = document.querySelector('[role="dialog"]');
-        if (!modal) return;
-        const scrollable = [...modal.querySelectorAll('*')].find(el => {
-          const cs = window.getComputedStyle(el);
-          return (cs.overflowY === 'auto' || cs.overflowY === 'scroll') && el.scrollHeight > el.clientHeight;
-        }) || modal;
-        scrollable.scrollTop += step;
-      }, SCROLL_STEP);
-      await sleep(SCROLL_PAUSE);
-      log(`  Scroll ${s + 1}/${FIXED_SCROLLS}`);
+      // ── 4. Scroll modal ─────────────────────────────────────────────────────
+      log('Scrolling modal to load all reviews...');
+      const FIXED_SCROLLS = 30;
+      for (let s = 0; s < FIXED_SCROLLS; s++) {
+        await page.evaluate((step) => {
+          const modal = document.querySelector('[role="dialog"]');
+          if (!modal) return;
+          const scrollable = [...modal.querySelectorAll('*')].find(el => {
+            const cs = window.getComputedStyle(el);
+            return (cs.overflowY === 'auto' || cs.overflowY === 'scroll') && el.scrollHeight > el.clientHeight;
+          }) || modal;
+          scrollable.scrollTop += step;
+        }, SCROLL_STEP);
+        await sleep(SCROLL_PAUSE);
+        log(`  Scroll ${s + 1}/${FIXED_SCROLLS}`);
+      }
+    } else {
+      log('No "Show all reviews" button — scraping reviews directly from page...');
+      // Scroll the full page to ensure all inline reviews are loaded
+      for (let s = 0; s < 10; s++) {
+        await page.evaluate(() => window.scrollBy(0, 800));
+        await sleep(600);
+      }
     }
 
     log(`Finished scrolling. Extracting reviews...`);
 
     // ── 5. Extract review data ────────────────────────────────────────────────
-    const reviews = await page.evaluate(() => {
-      const modal = document.querySelector('[role="dialog"]');
-      if (!modal) return [];
+    const reviews = await page.evaluate((useModal) => { // eslint-disable-line
+      const root = (useModal && document.querySelector('[role="dialog"]')) || document.body;
 
       const results = [];
 
@@ -154,11 +165,7 @@ async function main() {
       const seen = new Set();
 
       function tryStructured() {
-        // Find each reviewer by their h3 name heading
-        const nameEls = [...modal.querySelectorAll('h3')].filter(h => {
-          const p = h.closest('[role="dialog"]');
-          return p && h.textContent.trim().length > 0;
-        });
+        const nameEls = [...root.querySelectorAll('h3')].filter(h => h.textContent.trim().length > 0);
 
         for (const nameEl of nameEls) {
           const name = nameEl.textContent.trim();
@@ -211,7 +218,7 @@ async function main() {
         const META_RE    = /(\d+\s+years? on Airbnb|[A-Z][a-zA-ZéàâüöäÀ-ɏ'`\-\s]+,\s*[A-Z][a-zA-ZéàâüöäÀ-ɏ'`\-\s]+)/;
         const SKIP_RE    = /^(Translated by Google|Show original|Show more|Read more|Report this review|Report|Translate|Write a review|^$)/i;
 
-        const raw = modal.innerText || '';
+        const raw = root.innerText || '';
         const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
 
         let i = 0;
@@ -265,7 +272,7 @@ async function main() {
       // ── DOM photo pass ────────────────────────────────────────────────────
       // Try h3, then any element whose text exactly matches a reviewer name.
       {
-        const allEls = [...modal.querySelectorAll('*')];
+        const allEls = [...root.querySelectorAll('*')];
         for (const entry of results) {
           if (entry.photo) continue;
           const match = allEls.find(el =>
@@ -278,7 +285,7 @@ async function main() {
 
       // Last resort: grab all muscache imgs in modal order and assign sequentially
       if (results.every(r => !r.photo)) {
-        const allImgs = [...modal.querySelectorAll('img')].filter(img => {
+        const allImgs = [...root.querySelectorAll('img')].filter(img => {
           const s = img.src || '';
           return s.includes('muscache') || s.includes('airbnb');
         });
@@ -290,7 +297,7 @@ async function main() {
       // ── Fill in text for structured results ───────────────────────────────
       // (If structured extracted names but no text, do another pass)
       if (results.length > 0 && results.every(r => !r.text)) {
-        const raw   = modal.innerText || '';
+        const raw   = root.innerText || '';
         const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
         const MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
         const RATING_RE = /^Rating,\s+\d+\s+stars?$/i;
@@ -322,7 +329,7 @@ async function main() {
       }
 
       return results;
-    });
+    }, hasModal);
 
     log(`Extracted ${reviews.length} reviews.`);
 
