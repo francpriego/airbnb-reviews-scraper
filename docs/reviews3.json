@@ -1,48 +1,144 @@
 {
   "listing": "https://www.airbnb.com/rooms/37969234",
-  "scraped_at": "2026-06-21T13:50:15.951Z",
-  "count": 5,
+  "scraped_at": "2026-06-21T00:00:00.000Z",
+  "count": 17,
   "score": "5.0",
   "reviews": [
+    {
+      "name": "Lord & Gila",
+      "meta": "DeLand, Florida",
+      "date": "June 2026",
+      "text": "We enjoyed our stay. Our family had fun in the pool, privately.",
+      "kids": true,
+      "photo": ""
+    },
     {
       "name": "Aubrey Kaye",
       "meta": "Jeffersonville, Indiana",
       "date": "March 2026",
-      "photo": "",
       "text": "We stayed there for two night and it was an amazing experience! The place was so cozy and peaceful like you can really relax there after getting caught up in a big city. The hosts were very responsive, hospitable, and so easy to talk with. We also had the boodle fight for our dinner that was prepared by the host, and it was delicious. Overall, we got what we have paid for. No regrets in choosing this place to stay, we'll definitely go back here.",
-      "kids": false
+      "kids": false,
+      "photo": ""
     },
     {
-      "name": "Chris",
-      "meta": "15 years on Airbnb",
-      "date": "January 2026",
-      "photo": "",
-      "text": "We had a family gathering and 12 of us had a great time. The pool was in constant use and everything was as described. Tom and Rose were helpful and friendly, and gave recommendations when asked, were able to arrange a driver and a van for a family day out, and catered a boodle fight on one evening Thanks guys, it was great.",
-      "kids": false
+      "name": "Reina",
+      "meta": "11 years on Airbnb",
+      "date": "February 2026",
+      "text": "Our family had a great time especially the kids. Thanks a lot for the thoughtful birthday cake. The owners are friendly and accommodating",
+      "kids": false,
+      "photo": ""
     },
     {
       "name": "Chantelle",
       "meta": "11 years on Airbnb",
       "date": "February 2026",
-      "photo": "",
       "text": "We had an absolute wonderful stay. We brought my family from out of Davao to also stay with us. Rosemarie and Tom were friendly super responsive and wonderful hosts. We loved the space which was clean and had all the amenities we needed. They even set up all the bedrooms to accommodate us all comfortably. Photos matched reality and the family enjoyed the pool space and close proximity to the city. The space was also quiet and relaxing. On our son's first birthday they even surprised us with a birthday cake which was so thoughtful. We had an emergency stay at hospital and both Rosemarie and Tom were so caring and helpful to accommodate our situation. Highly recommend staying here and we will definitely be back next year!",
-      "kids": false
+      "kids": false,
+      "photo": ""
     },
     {
-      "name": "Lord & Gila",
-      "meta": "DeLand, Florida",
-      "date": "December 2025",
-      "photo": "",
-      "text": "Our family had a great time especially the kids. Thanks a lot for the thoughtful birthday cake. The owners are friendly and accommodating",
-      "kids": false
+      "name": "Chris",
+      "meta": "15 years on Airbnb",
+      "date": "January 2026",
+      "text": "We had a family gathering and 12 of us had a great time. The pool was in constant use and everything was as described. Tom and Rose were helpful and friendly, and gave recommendations when asked, were able to arrange a driver and a van for a family day out, and catered a boodle fight on one evening Thanks guys, it was great.",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Lisa",
+      "meta": "1 year on Airbnb",
+      "date": "September 2025",
+      "text": "Hey I'm Lisa! My family and I visited Felisa's Guesthouse for 3 weeks. We were received very lovingly and everything was shown to us in peace. There was a very positive and warm atmosphere and we all felt very comfortable! The exchange with Rosemarie and Thomas was flawless for the entire time. We were able to contact you at any time and you also gave us great tips for activities. The relatives of Rosemarie and Thomas were also very kind and helped us when they could. The location of Felisa's Guesthouse is beautifully quiet and the property is also fenced, which gave us security. The premises were clean and beautifully furnished! The pool was our highlight! With the loungers and the hammock, it was a perfect place to spend days in the AirB&B and let your mind wander. For us, Felisa's Guesthouse was our home for the time! A clear recommendation from the heart!",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Edward",
+      "meta": "State College, Pennsylvania",
+      "date": "April 2025",
+      "text": "We really can't find the words to express how much we enjoyed our stay at Rosemarie and Tom's compound. The swimming pool was a delight. The AC in the bedrooms was nice and cold. The Internet was crisp. And the guesthouse was spacious. But more importantly, the hosts: Rosemarie, Tom, Lot-Lot, and Manning made us feel like newfound friends or even family. Everyone was so kind. If we ever had questions, responses were provided quickly. There is literally nothing I can think of regarding this stay that could be improved upon. We look forward to seeing you again next year!",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Marlene",
+      "meta": "Bakersfield, California",
+      "date": "December 2024",
+      "text": "Maria was very nice and we enjoyed talking to her at arrival time. Our stay was very nice and pleasant and peaceful. Thank You for allowing us to stay here and enjoy your home.",
+      "kids": true,
+      "photo": ""
     },
     {
       "name": "Junette",
       "meta": "Toronto, Canada",
       "date": "August 2024",
-      "photo": "",
       "text": "My family of 9, including 3 kids, immensely enjoyed our stay at Rosemarie's! The pool was just what we needed to cool down on the super hot days and nights. Both Rose and Tom were very responsive and accommodating to our needs. Highly recommend their place - it's spacious for a large family; safe and quiet neighbourhood; coffee shops and laundry within walking distance.",
-      "kids": true
+      "kids": true,
+      "photo": ""
+    },
+    {
+      "name": "Rommel",
+      "meta": "8 years on Airbnb",
+      "date": "November 2022",
+      "text": "Perfect! It's not a guesthouse, it's a home! The owners and caretakers are super friendly. Ma'am Rosemarie, Ms. Lotlot, Ken and Mr. Thomas were all very welcoming. Very hospitable hosts. The place is clean and well maintained. The rooms are spacious and have all the basic amenities that all travelers need. There's a welcome gift and a lovely card which we thought was very sweet. It's a secured area and very peaceful. We enjoyed our stay in Davao even more. If you're traveling with a family to Davao and want some peace and quiet, this is your place! We will definitely come back!",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Derf",
+      "meta": "11 years on Airbnb",
+      "date": "September 2022",
+      "text": "The property is very homey. Our guests felt comfortable and at home. Ms. Lotlot is very accommodating. Highly recommendable. Thanks for accommodating my visitors. The property made their Davao visit more memorable.",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Maynard",
+      "meta": "Los Angeles, California",
+      "date": "June 2022",
+      "text": "The property is very nice and I liked how the units are spread throughout the compound. The pool is just the right size for kids and for adults to have fun and keep cool. We also enjoyed all the large eating areas to enjoy meals with larger groups. The ACs in each of the sleeping areas are very good and the restrooms are just fine. Also, the wif-fi speed was adequate. The onsite staff (at the main house) are also super friendly and accommodating. I highly recommend this place. The only thing that was an issue is that if you have a large rental vehicle like a van or big SUV...it can be difficult to maneuver into the parking area since the street is quite narrow.",
+      "kids": true,
+      "photo": ""
+    },
+    {
+      "name": "Andrew",
+      "meta": "United Kingdom",
+      "date": "May 2022",
+      "text": "The descriptions provided were very helpful and the accommodation lived up to expectations. Communication once we booked was fast and effective. Lot Lot was a very welcoming host and was always on hand that answer questions and help during our stay.",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Al",
+      "meta": "Keeling, Virginia",
+      "date": "July 2021",
+      "text": "The place was amazing!!! The kids had so much fun! It's easy to locate. Everything you'd need is in the location.",
+      "kids": true,
+      "photo": ""
+    },
+    {
+      "name": "Karen",
+      "meta": "9 years on Airbnb",
+      "date": "February 2021",
+      "text": "A great place to stay for families and friends who wants a quiet staycation. Clean, cozy, spacious and the host was helpful and pleasant. Two thumbs up!",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Jay",
+      "meta": "Fort Lee, New Jersey",
+      "date": "January 2020",
+      "text": "Nice place for the decent amount of charge. Very big space. Perfect for 10 personal family! Plus island hopping package near Samal island was the best part. Rose can also arrange local transportation and in lncluding excellent driver!",
+      "kids": false,
+      "photo": ""
+    },
+    {
+      "name": "Rosalie",
+      "meta": "10 years on Airbnb",
+      "date": "January 2020",
+      "text": "Much better than I expected. House is spacious and clean. Host were very thoughtful with welcome card and mangoes on the table. My family and I really enjoyed our stay.",
+      "kids": false,
+      "photo": ""
     }
   ]
 }
