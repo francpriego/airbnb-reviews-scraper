@@ -65,15 +65,15 @@
 .fgr-panel{display:none}.fgr-panel.is-active{display:block}
 
 /* ── Modal ── */
-.fgr-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:24px;animation:fgrFadeIn .2s ease}
+.fgr-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:40px 24px 24px;animation:fgrFadeIn .2s ease}
 .fgr-overlay.is-open{display:flex}
 @keyframes fgrFadeIn{from{opacity:0}to{opacity:1}}
-.fgr-modal{background:#fff;border-radius:16px;width:100%;max-width:620px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:fgrSlideUp .25s ease}
+.fgr-modal-wrap{position:relative;width:100%;max-width:620px}
+.fgr-modal{background:#fff;border-radius:16px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:fgrSlideUp .25s ease}
 @keyframes fgrSlideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-.fgr-modal-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e8e8e8;flex-shrink:0;gap:8px}
-.fgr-modal-icon-btn{width:36px;height:36px;border-radius:50%;background:none;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s;flex-shrink:0;font-family:inherit;font-size:17px;color:#444}
-.fgr-modal-icon-btn:hover{background:#f5f5f5}
-.fgr-modal-icon-btn svg{width:18px;height:18px;stroke:#333;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fgr-modal-close-btn{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;font-size:16px;color:#444;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:background .18s,color .18s;z-index:1}
+.fgr-modal-close-btn:hover{background:#2d7a4f;color:#fff}
+.fgr-modal-topbar{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #e8e8e8;flex-shrink:0}
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
 .fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:8px 12px;font-family:inherit;font-size:12px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
@@ -241,13 +241,7 @@
       modalTabsEl.appendChild(btn);
     });
 
-    var modalCloseBtn = document.createElement('button');
-    modalCloseBtn.className = 'fgr-modal-icon-btn';
-    modalCloseBtn.setAttribute('aria-label', 'Close');
-    modalCloseBtn.innerHTML = '&#10005;';
-
     modalTopbar.appendChild(modalTabsEl);
-    modalTopbar.appendChild(modalCloseBtn);
     sharedModal.appendChild(modalTopbar);
 
     /* One content div per dataset */
@@ -279,7 +273,16 @@
       sharedModal.appendChild(content);
     });
 
-    sharedOverlay.appendChild(sharedModal);
+    var modalCloseBtn = document.createElement('button');
+    modalCloseBtn.className = 'fgr-modal-close-btn';
+    modalCloseBtn.setAttribute('aria-label', 'Close');
+    modalCloseBtn.innerHTML = '&#10005;';
+
+    var modalWrap = document.createElement('div');
+    modalWrap.className = 'fgr-modal-wrap';
+    modalWrap.appendChild(modalCloseBtn);
+    modalWrap.appendChild(sharedModal);
+    sharedOverlay.appendChild(modalWrap);
     wrap.appendChild(sharedOverlay);
 
     /* switchModalTab: swap content & active tab button */
