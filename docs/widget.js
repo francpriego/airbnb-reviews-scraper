@@ -44,12 +44,14 @@
 .fgr-nav:disabled{opacity:.35;cursor:default}
 .fgr-card{flex:0 0 280px;background:#fff;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .fgr-card-top{display:flex;align-items:center;gap:14px}
-.fgr-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0}
-.fgr-card-top>img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0}
-.fgr-verified svg{width:18px;height:18px;flex-shrink:0}
+.fgr-avatar-wrap{position:relative;flex-shrink:0;width:56px;height:56px}
+.fgr-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
+.fgr-avatar-wrap>img{width:56px;height:56px;border-radius:50%;object-fit:cover;display:block}
+.fgr-verified{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #fff}
+.fgr-verified svg{display:block}
 .fgr-reviewer-name{font-size:15px;font-weight:700;color:#111;line-height:1.2}
 .fgr-reviewer-source{display:flex;align-items:center;gap:5px;font-size:12px;color:#666}
-.fgr-reviewer-source img{width:14px;height:14px;object-fit:contain;flex-shrink:0}
+.fgr-reviewer-source img{width:18px;height:18px;object-fit:contain;flex-shrink:0}
 .fgr-card-stars{display:flex;gap:2px}
 .fgr-card-star-y{width:16px;height:16px;fill:#FFB800}
 .fgr-card-text{font-size:13px;font-weight:300;line-height:1.65;color:#444;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;flex:1}
@@ -108,7 +110,7 @@
   /* ── SVGs ────────────────────────────────────────────────────────────────── */
   var AIRBNB      = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo2.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
   var AIRBNB_LOGO = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo2.png" alt="Airbnb" style="height:36px;width:auto;object-fit:contain;flex-shrink:0">';
-  var CHECK  = '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#00b4d8"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+  var CHECK  = '<svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="10" fill="#2e7d32"/><path d="M5.5 10l3 3 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
   var CSTAR  = '<svg class="fgr-card-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
   var HSTAR  = '<svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
   var MSTAR  = '<svg class="fgr-modal-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
@@ -201,7 +203,7 @@
 
       // Avatar HTML: real photo if available, else coloured initial
       var cardAvatarHtml = photo
-        ? '<img src="' + photo + '" alt="' + name + '" style="width:48px;height:48px;border-radius:50%;object-fit:cover;display:block">'
+        ? '<img src="' + photo + '" alt="' + name + '">'
         : '<div class="fgr-avatar" style="background:' + color + '">' + initial + '</div>';
 
       var modalAvatarHtml = photo
@@ -213,12 +215,12 @@
       card.className = 'fgr-card';
       card.innerHTML =
         '<div class="fgr-card-top">' +
-          cardAvatarHtml +
+          '<div class="fgr-avatar-wrap">' +
+            cardAvatarHtml +
+            '<div class="fgr-verified">' + CHECK + '</div>' +
+          '</div>' +
           '<div style="display:flex;flex-direction:column;gap:4px;justify-content:center">' +
-            '<div class="fgr-reviewer-name" style="display:flex;align-items:center;gap:5px">' +
-              name +
-              CHECK +
-            '</div>' +
+            '<div class="fgr-reviewer-name">' + name + '</div>' +
             '<div class="fgr-reviewer-source">' + AIRBNB + ' ' + date + '</div>' +
           '</div>' +
         '</div>' +
