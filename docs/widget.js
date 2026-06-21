@@ -1,18 +1,19 @@
 /**
  * Felisa's Guesthouse — Airbnb Reviews Embed Widget
  *
- * Usage (paste into any HTML page or Elementor HTML widget):
- *
+ * Usage:
  *   <script
  *     src="https://francpriego.github.io/airbnb-reviews-scraper/widget.js"
  *     data-url="https://francpriego.github.io/airbnb-reviews-scraper/reviews.json"
+ *     data-url2="https://francpriego.github.io/airbnb-reviews-scraper/reviews2.json"
  *   ></script>
  */
 (function () {
   'use strict';
 
-  var scriptEl   = document.currentScript;
-  var reviewsUrl = (scriptEl && scriptEl.getAttribute('data-url')) || 'reviews.json';
+  var scriptEl    = document.currentScript;
+  var reviewsUrl  = (scriptEl && scriptEl.getAttribute('data-url'))  || 'reviews.json';
+  var reviewsUrl2 = (scriptEl && scriptEl.getAttribute('data-url2')) || '';
 
   /* ── Inject CSS ──────────────────────────────────────────────────────────── */
   var CSS = `
@@ -23,10 +24,9 @@
 .fgr-tab{display:flex;align-items:center;gap:8px;padding:16px 20px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .18s,border-color .18s;margin-bottom:-1px}
 .fgr-tab:hover{color:#333}
 .fgr-tab.is-active{color:#111;border-bottom-color:#111;font-weight:600}
-.fgr-tab svg{width:14px;height:14px;flex-shrink:0}
+.fgr-tab img{width:14px;height:14px;flex-shrink:0;object-fit:contain}
 .fgr-header{display:flex;align-items:flex-start;justify-content:space-between;padding:28px 40px 24px;background:#fff;margin-bottom:24px;gap:16px;flex-wrap:wrap}
 .fgr-brand{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;color:#111;margin-bottom:8px}
-.fgr-brand svg{width:24px;height:24px;fill:#FF5A5F;flex-shrink:0}
 .fgr-score-row{display:flex;align-items:center;gap:8px}
 .fgr-score-big{font-size:28px;font-weight:700;color:#111;line-height:1}
 .fgr-stars-yellow{display:flex;gap:2px}
@@ -58,6 +58,9 @@
 .fgr-read-more{font-size:12.5px;font-weight:600;color:#2e7d32;background:none!important;border:none!important;padding:0!important;cursor:pointer;font-family:inherit;text-align:left;transition:color .18s;box-shadow:none!important;outline:none!important}
 .fgr-read-more:hover,.fgr-read-more:focus,.fgr-read-more:active{color:#2e7d32!important;background:none!important;border:none!important;box-shadow:none!important;outline:none!important}
 
+/* ── Listing panels ── */
+.fgr-panel{display:none}.fgr-panel.is-active{display:block}
+
 /* ── Modal ── */
 .fgr-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:24px;animation:fgrFadeIn .2s ease}
 .fgr-overlay.is-open{display:flex}
@@ -72,10 +75,8 @@
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
 .fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .fgr-modal-tab.is-active{color:#111;border-bottom-color:#111;font-weight:700}
-.fgr-modal-tab svg{width:13px;height:13px}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
 .fgr-modal-brand{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:800;color:#111;margin-bottom:10px;letter-spacing:-.01em}
-.fgr-modal-brand svg{width:28px;height:28px;fill:#FF5A5F;flex-shrink:0}
 .fgr-modal-score-row{display:flex;align-items:center;gap:10px}
 .fgr-modal-score-big{font-size:32px;font-weight:700;color:#111;line-height:1}
 .fgr-modal-stars{display:flex;gap:3px}
@@ -87,9 +88,8 @@
 .fgr-modal-reviewer{display:flex;align-items:center;gap:12px}
 .fgr-modal-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0}
 .fgr-modal-name-row{display:flex;align-items:center;gap:5px;font-size:14px;font-weight:700;color:#111}
-.fgr-modal-name-row svg{width:16px;height:16px}
 .fgr-modal-meta{display:flex;align-items:center;gap:5px;font-size:12px;color:#888;margin-top:2px}
-.fgr-modal-meta svg{width:12px;height:12px;fill:#FF5A5F}
+.fgr-modal-meta img{width:12px;height:12px;object-fit:contain}
 .fgr-modal-date{font-size:11px;color:#aaa;margin-top:2px}
 .fgr-modal-review-stars{display:flex;gap:2px}
 .fgr-modal-review-star{width:14px;height:14px;fill:#FFB800}
@@ -107,7 +107,7 @@
   style.textContent = CSS;
   document.head.appendChild(style);
 
-  /* ── SVGs ────────────────────────────────────────────────────────────────── */
+  /* ── SVGs / assets ───────────────────────────────────────────────────────── */
   var AIRBNB      = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo3.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
   var AIRBNB_LOGO = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo3.png" alt="Airbnb" style="height:36px;width:auto;object-fit:contain;flex-shrink:0">';
   var CHECK  = '<svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="10" fill="#2e7d32"/><path d="M5.5 10l3 3 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
@@ -121,87 +121,18 @@
 
   var COLORS = ['#2e7d32','#1f5c24','#388e3c','#2e7d32','#1a6b1e','#4caf50'];
 
-  /* ── Build DOM ───────────────────────────────────────────────────────────── */
-  function buildWidget(data) {
-    var reviews    = data.reviews    || [];
-    var totalCount = data.total_count || reviews.length;
-    var listingUrl = data.listing    || 'https://www.airbnb.com/rooms/17517160';
-    var score      = data.score      || '4.93';
-
-    /* wrapper */
-    var wrap = document.createElement('div');
-    wrap.className = 'fgr-wrap';
-
-    /* ── Tab bar + header + carousel shell ── */
-    wrap.innerHTML =
-      '<div class="fgr-tabs">' +
-        '<button class="fgr-tab is-active">All Reviews <strong style="margin-left:4px">' + score + '</strong></button>' +
-        '<button class="fgr-tab">' + AIRBNB + 'Guesthouse <strong style="margin-left:4px">' + score + '</strong></button>' +
-      '</div>' +
-
-      '<div class="fgr-header">' +
-        '<div>' +
-          '<div class="fgr-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
-          '<div class="fgr-score-row">' +
-            '<span class="fgr-score-big">' + score + '</span>' +
-            '<div class="fgr-stars-yellow">' + HSTAR.repeat(5) + '</div>' +
-            '<span class="fgr-review-count">(' + totalCount + ')</span>' +
-          '</div>' +
-        '</div>' +
-        '<button class="fgr-action-btn" id="fgrOpenAll">Read all ' + totalCount + ' reviews</button>' +
-      '</div>' +
-
-      '<div class="fgr-carousel-outer">' +
-        '<button class="fgr-nav fgr-nav-prev" id="fgrPrev" aria-label="Previous">' + PREV + '</button>' +
-        '<div class="fgr-carousel" id="fgrCarousel"></div>' +
-        '<button class="fgr-nav fgr-nav-next" id="fgrNext" aria-label="Next">' + NEXT + '</button>' +
-      '</div>' +
-
-      /* ── Modal ── */
-      '<div class="fgr-overlay" id="fgrOverlay" role="dialog" aria-modal="true">' +
-        '<div class="fgr-modal">' +
-
-          '<div class="fgr-modal-topbar">' +
-            '<button class="fgr-modal-icon-btn" id="fgrClose" aria-label="Close">' + BACK + '</button>' +
-            '<div class="fgr-modal-tabs">' +
-              '<button class="fgr-modal-tab is-active">' + AIRBNB + 'Guesthouse <strong>' + score + '</strong></button>' +
-            '</div>' +
-            '<button class="fgr-modal-icon-btn" id="fgrClose2" aria-label="Close">&#10005;</button>' +
-          '</div>' +
-
-          '<div class="fgr-modal-header">' +
-            '<div>' +
-              '<div class="fgr-modal-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
-              '<div class="fgr-modal-score-row">' +
-                '<span class="fgr-modal-score-big">' + score + '</span>' +
-                '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
-                '<span class="fgr-modal-count">(' + totalCount + ')</span>' +
-              '</div>' +
-            '</div>' +
-            '<a href="' + listingUrl + '" target="_blank" rel="noopener" class="fgr-action-btn" style="font-size:12px;padding:10px 18px">Write a Review</a>' +
-          '</div>' +
-
-          '<div class="fgr-modal-body" id="fgrModalBody"></div>' +
-        '</div>' +
-      '</div>';
-
-    /* ── Carousel cards ── */
-    var carousel  = wrap.querySelector('#fgrCarousel');
-    var modalBody = wrap.querySelector('#fgrModalBody');
-    var overlay   = wrap.querySelector('#fgrOverlay');
-
+  /* ── Build review cards + modal rows for one listing ─────────────────────── */
+  function buildCards(reviews, carousel, modalBody, prefix) {
     reviews.forEach(function (r, i) {
       var color   = COLORS[i % COLORS.length];
-      var initial = (r.name || r.n || '?').charAt(0).toUpperCase();
-      var name    = r.name || r.n || '';
-      var meta    = r.meta || r.m || '';
-      var date    = r.date || r.d || '';
-      var text    = r.text || r.t || '';
+      var initial = (r.name || '?').charAt(0).toUpperCase();
+      var name    = r.name || '';
+      var meta    = r.meta || '';
+      var date    = r.date || '';
+      var text    = r.text || '';
       var kids    = r.kids || false;
       var photo   = r.photo || '';
-      var metaLine = (kids ? '👨‍👩‍👧 · ' : '') + date;
 
-      // Avatar HTML: real photo if available, else coloured initial
       var cardAvatarHtml = photo
         ? '<img src="' + photo + '" alt="' + name + '">'
         : '<div class="fgr-avatar" style="background:' + color + '">' + initial + '</div>';
@@ -210,7 +141,6 @@
         ? '<img src="' + photo + '" alt="' + name + '" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0">'
         : '<div class="fgr-modal-avatar" style="background:' + color + '">' + initial + '</div>';
 
-      /* Carousel card */
       var card = document.createElement('div');
       card.className = 'fgr-card';
       card.innerHTML =
@@ -226,18 +156,18 @@
         '</div>' +
         '<div class="fgr-card-stars">' + CSTAR.repeat(5) + '</div>' +
         '<p class="fgr-card-text">' + text + '</p>' +
-        '<button class="fgr-read-more" data-idx="' + i + '">Read more</button>';
+        '<button class="fgr-read-more" data-idx="' + i + '" data-prefix="' + prefix + '">Read more</button>';
 
       card.querySelector('.fgr-read-more').addEventListener('click', function () {
-        openModal(parseInt(this.getAttribute('data-idx')));
+        var idx = parseInt(this.getAttribute('data-idx'));
+        var p   = this.getAttribute('data-prefix');
+        openModal(p, idx);
       });
-
       carousel.appendChild(card);
 
-      /* Modal review row */
       var row = document.createElement('div');
       row.className = 'fgr-modal-review';
-      row.id = 'fgrR' + i;
+      row.id = prefix + 'R' + i;
       row.innerHTML =
         '<div class="fgr-modal-reviewer">' +
           modalAvatarHtml +
@@ -252,42 +182,152 @@
 
       modalBody.appendChild(row);
     });
+  }
 
-    /* ── Carousel arrows ── */
-    var prev  = wrap.querySelector('#fgrPrev');
-    var next  = wrap.querySelector('#fgrNext');
-    var cardW = 280 + 16;
+  /* ── Build full widget with 1 or 2 listing tabs ──────────────────────────── */
+  function buildWidget(datasets) {
+    var wrap = document.createElement('div');
+    wrap.className = 'fgr-wrap';
 
-    function updateBtns() {
-      prev.disabled = carousel.scrollLeft <= 4;
-      next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 4;
-    }
-    prev.addEventListener('click', function () { carousel.scrollBy({ left: -cardW * 2, behavior: 'smooth' }); });
-    next.addEventListener('click', function () { carousel.scrollBy({ left:  cardW * 2, behavior: 'smooth' }); });
-    carousel.addEventListener('scroll', updateBtns);
-    setTimeout(updateBtns, 100);
+    /* Tab labels */
+    var tabLabels = ['Guesthouse', 'Garden House'];
+    var tabScores = datasets.map(function (d) { return d.score || '4.93'; });
+    var tabCounts = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
 
-    /* ── Modal open / close ── */
-    function openModal(idx) {
-      overlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-      setTimeout(function () {
-        var target = wrap.querySelector('#fgrR' + idx);
-        if (target) target.scrollIntoView({ block: 'start' });
-        else modalBody.scrollTop = 0;
-      }, 60);
-    }
+    /* ── Tab bar ── */
+    var tabBar = document.createElement('div');
+    tabBar.className = 'fgr-tabs';
+    datasets.forEach(function (d, ti) {
+      var btn = document.createElement('button');
+      btn.className = 'fgr-tab' + (ti === 0 ? ' is-active' : '');
+      btn.innerHTML = AIRBNB + ' ' + tabLabels[ti] + ' <strong style="margin-left:4px">' + tabScores[ti] + '</strong>';
+      tabBar.appendChild(btn);
+    });
+    wrap.appendChild(tabBar);
 
-    function closeModal() {
-      overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
+    /* ── One panel per listing ── */
+    var panels = [];
+    var carousels = [];
+    var modalBodies = [];
+    var overlays = [];
 
-    wrap.querySelector('#fgrOpenAll').addEventListener('click', function () { openModal(0); });
-    wrap.querySelector('#fgrClose').addEventListener('click', closeModal);
-    wrap.querySelector('#fgrClose2').addEventListener('click', closeModal);
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    datasets.forEach(function (data, ti) {
+      var reviews    = data.reviews    || [];
+      var totalCount = tabCounts[ti];
+      var listingUrl = data.listing    || '#';
+      var score      = tabScores[ti];
+      var prefix     = 'fgr' + ti + '_';
+
+      var panel = document.createElement('div');
+      panel.className = 'fgr-panel' + (ti === 0 ? ' is-active' : '');
+      panels.push(panel);
+
+      panel.innerHTML =
+        '<div class="fgr-header">' +
+          '<div>' +
+            '<div class="fgr-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
+            '<div class="fgr-score-row">' +
+              '<span class="fgr-score-big">' + score + '</span>' +
+              '<div class="fgr-stars-yellow">' + HSTAR.repeat(5) + '</div>' +
+              '<span class="fgr-review-count">(' + totalCount + ')</span>' +
+            '</div>' +
+          '</div>' +
+          '<button class="fgr-action-btn" id="' + prefix + 'OpenAll">Read all ' + totalCount + ' reviews</button>' +
+        '</div>' +
+
+        '<div class="fgr-carousel-outer">' +
+          '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
+          '<div class="fgr-carousel" id="' + prefix + 'Carousel"></div>' +
+          '<button class="fgr-nav fgr-nav-next" id="' + prefix + 'Next" aria-label="Next">' + NEXT + '</button>' +
+        '</div>' +
+
+        '<div class="fgr-overlay" id="' + prefix + 'Overlay" role="dialog" aria-modal="true">' +
+          '<div class="fgr-modal">' +
+            '<div class="fgr-modal-topbar">' +
+              '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close" aria-label="Close">' + BACK + '</button>' +
+              '<div class="fgr-modal-tabs">' +
+                '<button class="fgr-modal-tab is-active">' + AIRBNB + ' ' + tabLabels[ti] + ' <strong>' + score + '</strong></button>' +
+              '</div>' +
+              '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close2" aria-label="Close">&#10005;</button>' +
+            '</div>' +
+            '<div class="fgr-modal-header">' +
+              '<div>' +
+                '<div class="fgr-modal-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
+                '<div class="fgr-modal-score-row">' +
+                  '<span class="fgr-modal-score-big">' + score + '</span>' +
+                  '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
+                  '<span class="fgr-modal-count">(' + totalCount + ')</span>' +
+                '</div>' +
+              '</div>' +
+              '<a href="' + listingUrl + '" target="_blank" rel="noopener" class="fgr-action-btn" style="font-size:12px;padding:10px 18px">Write a Review</a>' +
+            '</div>' +
+            '<div class="fgr-modal-body" id="' + prefix + 'ModalBody"></div>' +
+          '</div>' +
+        '</div>';
+
+      wrap.appendChild(panel);
+
+      var carousel  = panel.querySelector('#' + prefix + 'Carousel');
+      var modalBody = panel.querySelector('#' + prefix + 'ModalBody');
+      var overlay   = panel.querySelector('#' + prefix + 'Overlay');
+      carousels.push(carousel);
+      modalBodies.push(modalBody);
+      overlays.push(overlay);
+
+      buildCards(reviews, carousel, modalBody, prefix);
+
+      /* Carousel arrows */
+      var prev  = panel.querySelector('#' + prefix + 'Prev');
+      var next  = panel.querySelector('#' + prefix + 'Next');
+      var cardW = 280 + 16;
+      function updateBtns() {
+        prev.disabled = carousel.scrollLeft <= 4;
+        next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 4;
+      }
+      prev.addEventListener('click', function () { carousel.scrollBy({ left: -cardW * 2, behavior: 'smooth' }); });
+      next.addEventListener('click', function () { carousel.scrollBy({ left:  cardW * 2, behavior: 'smooth' }); });
+      carousel.addEventListener('scroll', updateBtns);
+      setTimeout(updateBtns, 100);
+
+      /* Modal */
+      function openModal(p, idx) {
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function () {
+          var target = panel.querySelector('#' + p + 'R' + idx);
+          if (target) target.scrollIntoView({ block: 'start' });
+          else modalBody.scrollTop = 0;
+        }, 60);
+      }
+      function closeModal() {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
+      panel.querySelector('#' + prefix + 'Close').addEventListener('click', closeModal);
+      panel.querySelector('#' + prefix + 'Close2').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    });
+
+    /* Global Escape closes any open modal */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlays.forEach(function (o) {
+        o.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ── Tab switching ── */
+    var tabs = tabBar.querySelectorAll('.fgr-tab');
+    tabs.forEach(function (tab, ti) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        panels.forEach(function (p) { p.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        panels[ti].classList.add('is-active');
+      });
+    });
 
     return wrap;
   }
@@ -303,14 +343,15 @@
     document.body.appendChild(placeholder);
   }
 
-  /* ── Fetch reviews.json ──────────────────────────────────────────────────── */
-  fetch(reviewsUrl)
-    .then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    })
-    .then(function (data) {
-      var widget = buildWidget(data);
+  /* ── Fetch one or two JSON files ─────────────────────────────────────────── */
+  var fetches = [fetch(reviewsUrl).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })];
+  if (reviewsUrl2) {
+    fetches.push(fetch(reviewsUrl2).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }));
+  }
+
+  Promise.all(fetches)
+    .then(function (datasets) {
+      var widget = buildWidget(datasets);
       placeholder.parentNode.replaceChild(widget, placeholder);
     })
     .catch(function (err) {

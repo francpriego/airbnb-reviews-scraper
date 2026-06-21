@@ -16,7 +16,7 @@ puppeteer.use(Stealth());
 // ── Config ────────────────────────────────────────────────────────────────────
 const LISTING_URL = process.env.AIRBNB_LISTING_URL || 'https://www.airbnb.com/rooms/17517160';
 const OUT_DIR     = path.join(__dirname, '..', 'docs');
-const OUT_FILE    = path.join(OUT_DIR, 'reviews.json');
+const OUT_FILE    = path.join(OUT_DIR, process.env.OUT_FILE || 'reviews.json');
 
 const SCROLL_STEP    = 700;   // px per scroll inside the modal
 const SCROLL_PAUSE   = 1800;  // ms to wait after each scroll
@@ -33,6 +33,7 @@ async function main() {
 
   const browser = await puppeteer.launch({
     headless: 'new',
+    protocolTimeout: 60_000,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
