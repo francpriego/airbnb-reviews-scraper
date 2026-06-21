@@ -22,9 +22,9 @@
   var CSS = `
 .fgr-wrap*,.fgr-wrap *::before,.fgr-wrap *::after{box-sizing:border-box;margin:0;padding:0}
 .fgr-wrap{width:100%;background:#f5f3ee;font-family:'Libre Franklin',Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 48px}
-.fgr-tabs{display:flex;align-items:center;background:#fff;border-bottom:1px solid #e8e8e8;padding:0 40px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.fgr-tabs{display:flex;align-items:center;background:#fff;border-bottom:1px solid #e8e8e8;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .fgr-tabs::-webkit-scrollbar{display:none}
-.fgr-tab{display:flex;align-items:center;gap:8px;padding:16px 20px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .18s,border-color .18s;margin-bottom:-1px}
+.fgr-tab{display:flex;align-items:center;gap:6px;padding:12px 14px;font-family:inherit;font-size:12px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;margin-bottom:-1px}
 .fgr-tab:hover{color:#fff;background:#2d7a4f;border-radius:6px}
 .fgr-tab.is-active{color:#fff;background:#2d7a4f;border-bottom-color:#2d7a4f;font-weight:600;border-radius:6px}
 .fgr-tab img{width:14px;height:14px;flex-shrink:0;object-fit:contain}
@@ -76,7 +76,7 @@
 .fgr-modal-icon-btn svg{width:18px;height:18px;stroke:#333;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
-.fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:8px 12px;font-family:inherit;font-size:12px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .fgr-modal-tab:hover{color:#fff;background:#2d7a4f;border-radius:6px}
 .fgr-modal-tab.is-active{color:#fff;background:#2d7a4f;border-bottom-color:#2d7a4f;font-weight:700;border-radius:6px}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
