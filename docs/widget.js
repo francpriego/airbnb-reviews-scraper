@@ -287,7 +287,11 @@
       prev.addEventListener('click', function () { carousel.scrollBy({ left: -cardW * 2, behavior: 'smooth' }); });
       next.addEventListener('click', function () { carousel.scrollBy({ left:  cardW * 2, behavior: 'smooth' }); });
       carousel.addEventListener('scroll', updateBtns);
-      setTimeout(updateBtns, 100);
+      // Re-run after cards load AND when carousel becomes visible (handles Elementor hidden tabs)
+      var _io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { updateBtns(); _io.disconnect(); }
+      });
+      _io.observe(carousel);
 
       /* Modal */
       function openModal(p, idx) {
@@ -305,6 +309,7 @@
       }
 
       buildCards(reviews, carousel, modalBody, prefix, openModal);
+      updateBtns();
 
       panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
       panel.querySelector('#' + prefix + 'Close').addEventListener('click', closeModal);
