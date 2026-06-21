@@ -107,7 +107,8 @@
   document.head.appendChild(style);
 
   /* ── SVGs ────────────────────────────────────────────────────────────────── */
-  var AIRBNB = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
+  var AIRBNB      = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
+  var AIRBNB_LOGO = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo.png" alt="Airbnb" style="height:36px;width:auto;object-fit:contain;flex-shrink:0">';
   var CHECK  = '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#00b4d8"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
   var CSTAR  = '<svg class="fgr-card-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
   var HSTAR  = '<svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
@@ -139,7 +140,7 @@
 
       '<div class="fgr-header">' +
         '<div>' +
-          '<div class="fgr-brand">' + AIRBNB + 'airbnb Reviews</div>' +
+          '<div class="fgr-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
           '<div class="fgr-score-row">' +
             '<span class="fgr-score-big">' + score + '</span>' +
             '<div class="fgr-stars-yellow">' + HSTAR.repeat(5) + '</div>' +
@@ -169,7 +170,7 @@
 
           '<div class="fgr-modal-header">' +
             '<div>' +
-              '<div class="fgr-modal-brand">' + AIRBNB + 'airbnb Reviews</div>' +
+              '<div class="fgr-modal-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
               '<div class="fgr-modal-score-row">' +
                 '<span class="fgr-modal-score-big">' + score + '</span>' +
                 '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
