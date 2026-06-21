@@ -47,8 +47,8 @@
 .fgr-avatar-wrap{position:relative;flex-shrink:0;width:56px;height:56px}
 .fgr-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
 .fgr-avatar-wrap>img{width:56px;height:56px;border-radius:50%;object-fit:cover;display:block}
-.fgr-verified{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #fff}
-.fgr-verified svg{display:block}
+.fgr-avatar-badge{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff}
+.fgr-avatar-badge img{width:16px;height:16px;object-fit:contain;display:block}
 .fgr-reviewer-name{font-size:15px;font-weight:700;color:#111;line-height:1.2}
 .fgr-reviewer-source{display:flex;align-items:center;gap:5px;font-size:12px;color:#666}
 .fgr-reviewer-source img{width:18px;height:18px;object-fit:contain;flex-shrink:0}
@@ -217,11 +217,11 @@
         '<div class="fgr-card-top">' +
           '<div class="fgr-avatar-wrap">' +
             cardAvatarHtml +
-            '<div class="fgr-verified">' + CHECK + '</div>' +
+            '<div class="fgr-avatar-badge">' + AIRBNB + '</div>' +
           '</div>' +
           '<div style="display:flex;flex-direction:column;gap:4px;justify-content:center">' +
-            '<div class="fgr-reviewer-name">' + name + '</div>' +
-            '<div class="fgr-reviewer-source">' + AIRBNB + ' ' + date + '</div>' +
+            '<div class="fgr-reviewer-name" style="display:flex;align-items:center;gap:5px">' + name + CHECK + '</div>' +
+            '<div class="fgr-reviewer-source">' + date + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="fgr-card-stars">' + CSTAR.repeat(5) + '</div>' +
