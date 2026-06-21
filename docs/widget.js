@@ -21,7 +21,7 @@
   /* ── Inject CSS ──────────────────────────────────────────────────────────── */
   var CSS = `
 .fgr-wrap*,.fgr-wrap *::before,.fgr-wrap *::after{box-sizing:border-box;margin:0;padding:0}
-.fgr-wrap{width:100%;background:#f5f3ee;font-family:'Libre Franklin',Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 48px}
+.fgr-wrap{width:100%;background:#fff;font-family:'Libre Franklin',Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 48px}
 .fgr-tabs{display:flex;align-items:center;background:#fff;border-bottom:1px solid #e8e8e8;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .fgr-tabs::-webkit-scrollbar{display:none}
 .fgr-tab{display:flex;align-items:center;gap:6px;padding:12px 14px;font-family:inherit;font-size:12px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;margin-bottom:-1px}
