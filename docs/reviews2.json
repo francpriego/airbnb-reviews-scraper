@@ -1,199 +1,39 @@
 {
-  "listing": "https://www.airbnb.com/rooms/37967370?locale=en",
-  "scraped_at": "2026-06-21T03:46:44.588Z",
-  "count": 24,
+  "listing": "https://www.airbnb.com/rooms/37967370",
+  "scraped_at": "2026-06-21T00:00:00.000Z",
+  "count": 4,
   "reviews": [
-    {
-      "name": "Dive right in",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Self check-in",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Peace and quiet",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "May 2026",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "June 2026",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "July 2026",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "August 2026",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Overall rating",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for cleanliness",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for accuracy",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for check-in",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for communication",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for location",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
-    {
-      "name": "Rated 5.0 out of 5 stars for value",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": ""
-    },
     {
       "name": "Saleh",
       "meta": "12 years on Airbnb",
-      "date": "",
-      "text": "",
+      "date": "July 2023",
+      "text": "Rosemarie went out of her way to make us feel comfortable and right at home. She welcomed us warmly and always kept asking us about our stay (she lived in the main house). The house is nestled in a quiet location, had a beautiful newly renovated pool which was a bliss, and had comfortable furnishings. The AC worked well and the kitchen was ok although it might not be well equipped for avid cooks.",
       "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/user/f1e21be1-ca1b-4a91-bc99-c57a5eead231.jpg?im_w=720"
+      "photo": ""
     },
     {
       "name": "Jerry",
       "meta": "Wasilla, Alaska",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/user/b706752e-a6c9-4edb-a1f6-1ac1932d4959.jpg?im_w=720"
-    },
-    {
-      "name": "Neighbourhood highlights",
-      "meta": "",
-      "date": "December 2017",
-      "text": "",
+      "date": "June 2020",
+      "text": "As always, the stay was peaceful. Love coming here.",
       "kids": false,
       "photo": ""
     },
     {
-      "name": "Rosemarie is a Superhost",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/user/b2af3d99-eb64-4380-976d-2d6a37a4a692.jpg?im_w=720"
-    },
-    {
-      "name": "Co-Hosts",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/user/b2af3d99-eb64-4380-976d-2d6a37a4a692.jpg?im_w=720"
-    },
-    {
-      "name": "Host details",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/user/b2af3d99-eb64-4380-976d-2d6a37a4a692.jpg?im_w=720"
-    },
-    {
-      "name": "Other types of stays on Airbnb",
-      "meta": "",
-      "date": "",
-      "text": "",
+      "name": "Jerry",
+      "meta": "Wasilla, Alaska",
+      "date": "May 2020",
+      "text": "Seriously the best get away place in Davao. You will like the quiet space they have provided, if ur like me and like to be close to the city and close for all the wonderful take out places, but tired of all the loud noises of the city. You can't go wrong here. Best place to have some quite time and just relax.",
       "kids": false,
       "photo": ""
     },
     {
-      "name": "Support",
-      "meta": "",
-      "date": "",
-      "text": "",
+      "name": "利娟",
+      "meta": "10 years on Airbnb",
+      "date": "December 2019",
+      "text": "带着老人孩子一家五口在达沃的Felisa gardenhouse 度过了非常愉快的圣诞假期，房子非常干净，房东非常友善，热情，每天都要问我们一下有什么需要帮助的吗？帮助我们叫车去我们想去的地方，圣诞节的早上还端来了她自己做的两盘美食，味道非常好！我的儿子前几日发烧，房东非常关心，及时告诉了我们很多附近医院的信息，推荐了医生，深入达沃民宿我们感受到的不仅仅是菲律宾的文化背景还有他们每天热情的问候，关心和难忘的笑容！",
       "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
-    },
-    {
-      "name": "Hosting",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
-    },
-    {
-      "name": "Airbnb",
-      "meta": "",
-      "date": "",
-      "text": "",
-      "kids": false,
-      "photo": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
+      "photo": ""
     }
   ]
 }
