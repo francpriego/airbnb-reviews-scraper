@@ -77,7 +77,8 @@
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
 .fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.fgr-modal-tab.is-active{color:#111;border-bottom-color:#111;font-weight:700}
+.fgr-modal-tab:hover{color:#fff;background:#2d7a4f;border-radius:6px}
+.fgr-modal-tab.is-active{color:#fff;background:#2d7a4f;border-bottom-color:#2d7a4f;font-weight:700;border-radius:6px}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
 .fgr-modal-brand{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:800;color:#111;margin-bottom:10px;letter-spacing:-.01em}
 .fgr-modal-score-row{display:flex;align-items:center;gap:10px}
@@ -256,9 +257,7 @@
         '<div class="fgr-overlay" id="' + prefix + 'Overlay" role="dialog" aria-modal="true">' +
           '<div class="fgr-modal">' +
             '<div class="fgr-modal-topbar">' +
-              '<div class="fgr-modal-tabs">' +
-                '<button class="fgr-modal-tab is-active">' + tabIcon + ' ' + tabLabels[ti] + ' <strong>' + score + '</strong></button>' +
-              '</div>' +
+              '<div class="fgr-modal-tabs" id="' + prefix + 'ModalTabBar"></div>' +
               '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close2" aria-label="Close">&#10005;</button>' +
             '</div>' +
             '<div class="fgr-modal-header">' +
@@ -323,6 +322,25 @@
       panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
       panel.querySelector('#' + prefix + 'Close2').addEventListener('click', closeModal);
       overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    });
+
+    /* ── Populate modal tab bars with all tabs ── */
+    datasets.forEach(function (d, ti) {
+      var prefix = 'fgr' + ti + '_';
+      var modalTabBar = panels[ti].querySelector('#' + prefix + 'ModalTabBar');
+      datasets.forEach(function (d2, tj) {
+        var icon2 = tabSources[tj] === 'google' ? GOOGLE_ICON : AIRBNB;
+        var btn = document.createElement('button');
+        btn.className = 'fgr-modal-tab' + (tj === ti ? ' is-active' : '');
+        btn.innerHTML = icon2 + ' ' + tabLabels[tj] + ' <strong>' + tabScores[tj] + '</strong>';
+        btn.addEventListener('click', function () {
+          if (tj === ti) return;
+          overlays[ti].classList.remove('is-open');
+          overlays[tj].classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        });
+        modalTabBar.appendChild(btn);
+      });
     });
 
     /* Global Escape closes any open modal */
