@@ -1,0 +1,48 @@
+{
+  "listing": "https://www.airbnb.com/rooms/37969234",
+  "scraped_at": "2026-06-21T13:50:15.951Z",
+  "count": 5,
+  "score": "5.0",
+  "reviews": [
+    {
+      "name": "Aubrey Kaye",
+      "meta": "Jeffersonville, Indiana",
+      "date": "March 2026",
+      "photo": "",
+      "text": "We stayed there for two night and it was an amazing experience! The place was so cozy and peaceful like you can really relax there after getting caught up in a big city. The hosts were very responsive, hospitable, and so easy to talk with. We also had the boodle fight for our dinner that was prepared by the host, and it was delicious. Overall, we got what we have paid for. No regrets in choosing this place to stay, we'll definitely go back here.",
+      "kids": false
+    },
+    {
+      "name": "Chris",
+      "meta": "15 years on Airbnb",
+      "date": "January 2026",
+      "photo": "",
+      "text": "We had a family gathering and 12 of us had a great time. The pool was in constant use and everything was as described. Tom and Rose were helpful and friendly, and gave recommendations when asked, were able to arrange a driver and a van for a family day out, and catered a boodle fight on one evening Thanks guys, it was great.",
+      "kids": false
+    },
+    {
+      "name": "Chantelle",
+      "meta": "11 years on Airbnb",
+      "date": "February 2026",
+      "photo": "",
+      "text": "We had an absolute wonderful stay. We brought my family from out of Davao to also stay with us. Rosemarie and Tom were friendly super responsive and wonderful hosts. We loved the space which was clean and had all the amenities we needed. They even set up all the bedrooms to accommodate us all comfortably. Photos matched reality and the family enjoyed the pool space and close proximity to the city. The space was also quiet and relaxing. On our son's first birthday they even surprised us with a birthday cake which was so thoughtful. We had an emergency stay at hospital and both Rosemarie and Tom were so caring and helpful to accommodate our situation. Highly recommend staying here and we will definitely be back next year!",
+      "kids": false
+    },
+    {
+      "name": "Lord & Gila",
+      "meta": "DeLand, Florida",
+      "date": "December 2025",
+      "photo": "",
+      "text": "Our family had a great time especially the kids. Thanks a lot for the thoughtful birthday cake. The owners are friendly and accommodating",
+      "kids": false
+    },
+    {
+      "name": "Junette",
+      "meta": "Toronto, Canada",
+      "date": "August 2024",
+      "photo": "",
+      "text": "My family of 9, including 3 kids, immensely enjoyed our stay at Rosemarie's! The pool was just what we needed to cool down on the super hot days and nights. Both Rose and Tom were very responsive and accommodating to our needs. Highly recommend their place - it's spacious for a large family; safe and quiet neighbourhood; coffee shops and laundry within walking distance.",
+      "kids": true
+    }
+  ]
+}
