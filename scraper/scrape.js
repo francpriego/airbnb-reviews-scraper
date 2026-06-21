@@ -253,7 +253,7 @@ async function main() {
                 j++;
               }
 
-              const text = textLines.join(' ').trim();
+              const text = textLines.join(' ').trim().replace(/\s*Response from\s[\s\S]*/i, '').trim();
 
               results.push({
                 name:  name.trim(),
