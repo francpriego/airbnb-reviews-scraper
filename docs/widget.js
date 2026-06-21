@@ -25,8 +25,8 @@
 .fgr-tabs{display:flex;align-items:center;background:#fff;border-bottom:1px solid #e8e8e8;padding:0 40px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .fgr-tabs::-webkit-scrollbar{display:none}
 .fgr-tab{display:flex;align-items:center;gap:8px;padding:16px 20px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .18s,border-color .18s;margin-bottom:-1px}
-.fgr-tab:hover{color:#333}
-.fgr-tab.is-active{color:#111;border-bottom-color:#111;font-weight:600}
+.fgr-tab:hover{color:#fff;background:#2d7a4f;border-radius:6px}
+.fgr-tab.is-active{color:#fff;background:#2d7a4f;border-bottom-color:#2d7a4f;font-weight:600;border-radius:6px}
 .fgr-tab img{width:14px;height:14px;flex-shrink:0;object-fit:contain}
 .fgr-header{display:flex;align-items:flex-start;justify-content:space-between;padding:28px 40px 24px;background:#fff;margin-bottom:24px;gap:16px;flex-wrap:wrap}
 .fgr-brand{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;color:#111;margin-bottom:8px}
