@@ -192,7 +192,7 @@
     wrap.className = 'fgr-wrap';
 
     /* Tab labels */
-    var tabLabels = ['Guesthouse', 'Garden House', 'Studio Unit'];
+    var tabLabels = ['Guesthouse', 'Garden House', 'Both Houses'];
     var tabScores = datasets.map(function (d) { return d.score || '4.93'; });
     var tabCounts = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
 
