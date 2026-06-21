@@ -192,7 +192,7 @@
     });
   }
 
-  /* ── Build full widget with 1 or 2 listing tabs ──────────────────────────── */
+  /* ── Build full widget with 1–4 listing tabs ─────────────────────────────── */
   function buildWidget(datasets) {
     var wrap = document.createElement('div');
     wrap.className = 'fgr-wrap';
@@ -203,7 +203,7 @@
     var tabScores  = datasets.map(function (d) { return d.score || '4.93'; });
     var tabCounts  = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
 
-    /* ── Tab bar ── */
+    /* ── Main tab bar ── */
     var tabBar = document.createElement('div');
     tabBar.className = 'fgr-tabs';
     datasets.forEach(function (d, ti) {
@@ -215,21 +215,117 @@
     });
     wrap.appendChild(tabBar);
 
+    /* ── Shared modal (one overlay, content swaps per tab) ── */
+    var sharedOverlay = document.createElement('div');
+    sharedOverlay.className = 'fgr-overlay';
+    sharedOverlay.setAttribute('role', 'dialog');
+    sharedOverlay.setAttribute('aria-modal', 'true');
+
+    var sharedModal = document.createElement('div');
+    sharedModal.className = 'fgr-modal';
+
+    /* Modal topbar with all tabs */
+    var modalTopbar = document.createElement('div');
+    modalTopbar.className = 'fgr-modal-topbar';
+
+    var modalTabsEl = document.createElement('div');
+    modalTabsEl.className = 'fgr-modal-tabs';
+
+    var modalTabBtns = [];
+    datasets.forEach(function (d, ti) {
+      var icon = tabSources[ti] === 'google' ? GOOGLE_ICON : AIRBNB;
+      var btn = document.createElement('button');
+      btn.className = 'fgr-modal-tab' + (ti === 0 ? ' is-active' : '');
+      btn.innerHTML = icon + ' ' + tabLabels[ti] + ' <strong>' + tabScores[ti] + '</strong>';
+      modalTabBtns.push(btn);
+      modalTabsEl.appendChild(btn);
+    });
+
+    var modalCloseBtn = document.createElement('button');
+    modalCloseBtn.className = 'fgr-modal-icon-btn';
+    modalCloseBtn.setAttribute('aria-label', 'Close');
+    modalCloseBtn.innerHTML = '&#10005;';
+
+    modalTopbar.appendChild(modalTabsEl);
+    modalTopbar.appendChild(modalCloseBtn);
+    sharedModal.appendChild(modalTopbar);
+
+    /* One content div per dataset */
+    var contentDivs = [];
+    datasets.forEach(function (data, ti) {
+      var isGoogle   = tabSources[ti] === 'google';
+      var headerLogo = isGoogle ? GOOGLE_LOGO : AIRBNB_LOGO;
+      var score      = tabScores[ti];
+      var totalCount = tabCounts[ti];
+      var listingUrl = data.listing || '#';
+
+      var content = document.createElement('div');
+      content.style.cssText = 'display:' + (ti === 0 ? 'flex' : 'none') + ';flex-direction:column;flex:1;overflow:hidden';
+      content.innerHTML =
+        '<div class="fgr-modal-header">' +
+          '<div>' +
+            '<div class="fgr-modal-brand">' + headerLogo + ' Reviews</div>' +
+            '<div class="fgr-modal-score-row">' +
+              '<span class="fgr-modal-score-big">' + score + '</span>' +
+              '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
+              '<span class="fgr-modal-count">(' + totalCount + ')</span>' +
+            '</div>' +
+          '</div>' +
+          '<a href="' + listingUrl + '" target="_blank" rel="noopener" class="fgr-action-btn" style="font-size:12px;padding:10px 18px">Write a Review</a>' +
+        '</div>' +
+        '<div class="fgr-modal-body" id="fgr' + ti + '_ModalBody"></div>';
+
+      contentDivs.push(content);
+      sharedModal.appendChild(content);
+    });
+
+    sharedOverlay.appendChild(sharedModal);
+    wrap.appendChild(sharedOverlay);
+
+    /* switchModalTab: swap content & active tab button */
+    function switchModalTab(ti) {
+      modalTabBtns.forEach(function (b, i) { b.classList.toggle('is-active', i === ti); });
+      contentDivs.forEach(function (c, i) { c.style.display = i === ti ? 'flex' : 'none'; });
+    }
+
+    function openSharedModal(tabIndex, reviewPrefix, reviewIdx) {
+      switchModalTab(tabIndex);
+      sharedOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () {
+        if (reviewIdx !== null && reviewIdx !== undefined) {
+          var target = document.getElementById(reviewPrefix + 'R' + reviewIdx);
+          if (target) { target.scrollIntoView({ block: 'start' }); return; }
+        }
+        var body = contentDivs[tabIndex].querySelector('.fgr-modal-body');
+        if (body) body.scrollTop = 0;
+      }, 60);
+    }
+
+    function closeSharedModal() {
+      sharedOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    /* Modal tab clicks */
+    modalTabBtns.forEach(function (btn, ti) {
+      btn.addEventListener('click', function () { switchModalTab(ti); });
+    });
+
+    modalCloseBtn.addEventListener('click', closeSharedModal);
+    sharedOverlay.addEventListener('click', function (e) { if (e.target === sharedOverlay) closeSharedModal(); });
+
     /* ── One panel per listing ── */
     var panels = [];
     var carousels = [];
-    var modalBodies = [];
-    var overlays = [];
 
     datasets.forEach(function (data, ti) {
-      var reviews    = data.reviews    || [];
+      var reviews    = data.reviews || [];
       var totalCount = tabCounts[ti];
-      var listingUrl = data.listing    || '#';
-      var score      = tabScores[ti];
       var prefix     = 'fgr' + ti + '_';
       var isGoogle   = tabSources[ti] === 'google';
-      var tabIcon    = isGoogle ? GOOGLE_ICON : AIRBNB;
       var headerLogo = isGoogle ? GOOGLE_LOGO : AIRBNB_LOGO;
+      var score      = tabScores[ti];
 
       var panel = document.createElement('div');
       panel.className = 'fgr-panel' + (ti === 0 ? ' is-active' : '');
@@ -247,46 +343,21 @@
           '</div>' +
           '<button class="fgr-action-btn" id="' + prefix + 'OpenAll">Read all ' + totalCount + ' reviews</button>' +
         '</div>' +
-
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
           '<div class="fgr-carousel" id="' + prefix + 'Carousel"></div>' +
           '<button class="fgr-nav fgr-nav-next" id="' + prefix + 'Next" aria-label="Next">' + NEXT + '</button>' +
-        '</div>' +
-
-        '<div class="fgr-overlay" id="' + prefix + 'Overlay" role="dialog" aria-modal="true">' +
-          '<div class="fgr-modal">' +
-            '<div class="fgr-modal-topbar">' +
-              '<div class="fgr-modal-tabs" id="' + prefix + 'ModalTabBar"></div>' +
-              '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close2" aria-label="Close">&#10005;</button>' +
-            '</div>' +
-            '<div class="fgr-modal-header">' +
-              '<div>' +
-                '<div class="fgr-modal-brand">' + headerLogo + ' Reviews</div>' +
-                '<div class="fgr-modal-score-row">' +
-                  '<span class="fgr-modal-score-big">' + score + '</span>' +
-                  '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
-                  '<span class="fgr-modal-count">(' + totalCount + ')</span>' +
-                '</div>' +
-              '</div>' +
-              '<a href="' + listingUrl + '" target="_blank" rel="noopener" class="fgr-action-btn" style="font-size:12px;padding:10px 18px">Write a Review</a>' +
-            '</div>' +
-            '<div class="fgr-modal-body" id="' + prefix + 'ModalBody"></div>' +
-          '</div>' +
         '</div>';
 
       wrap.appendChild(panel);
 
       var carousel  = panel.querySelector('#' + prefix + 'Carousel');
-      var modalBody = panel.querySelector('#' + prefix + 'ModalBody');
-      var overlay   = panel.querySelector('#' + prefix + 'Overlay');
+      var modalBody = contentDivs[ti].querySelector('.fgr-modal-body');
       carousels.push(carousel);
-      modalBodies.push(modalBody);
-      overlays.push(overlay);
 
       /* Carousel arrows */
-      var prev  = panel.querySelector('#' + prefix + 'Prev');
-      var next  = panel.querySelector('#' + prefix + 'Next');
+      var prev = panel.querySelector('#' + prefix + 'Prev');
+      var next = panel.querySelector('#' + prefix + 'Next');
       var cardW = 280 + 16;
       function updateBtns() {
         prev.disabled = carousel.scrollLeft <= 4;
@@ -295,63 +366,29 @@
       prev.addEventListener('click', function () { carousel.scrollBy({ left: -cardW * 2, behavior: 'smooth' }); });
       next.addEventListener('click', function () { carousel.scrollBy({ left:  cardW * 2, behavior: 'smooth' }); });
       carousel.addEventListener('scroll', updateBtns);
-      // Re-run after cards load AND when carousel becomes visible (handles Elementor hidden tabs)
       var _io = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) { updateBtns(); _io.disconnect(); }
       });
       _io.observe(carousel);
 
-      /* Modal */
-      function openModal(p, idx) {
-        overlay.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-        setTimeout(function () {
-          var target = panel.querySelector('#' + p + 'R' + idx);
-          if (target) target.scrollIntoView({ block: 'start' });
-          else modalBody.scrollTop = 0;
-        }, 60);
-      }
-      function closeModal() {
-        overlay.classList.remove('is-open');
-        document.body.style.overflow = '';
-      }
-
-      buildCards(reviews, carousel, modalBody, prefix, openModal, isGoogle);
-      updateBtns();
-
-      panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
-      panel.querySelector('#' + prefix + 'Close2').addEventListener('click', closeModal);
-      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
-    });
-
-    /* ── Populate modal tab bars with all tabs ── */
-    datasets.forEach(function (d, ti) {
-      var prefix = 'fgr' + ti + '_';
-      var modalTabBar = panels[ti].querySelector('#' + prefix + 'ModalTabBar');
-      datasets.forEach(function (d2, tj) {
-        var icon2 = tabSources[tj] === 'google' ? GOOGLE_ICON : AIRBNB;
-        var btn = document.createElement('button');
-        btn.className = 'fgr-modal-tab' + (tj === ti ? ' is-active' : '');
-        btn.innerHTML = icon2 + ' ' + tabLabels[tj] + ' <strong>' + tabScores[tj] + '</strong>';
-        btn.addEventListener('click', function () {
-          if (tj === ti) return;
-          overlays[ti].classList.remove('is-open');
-          overlays[tj].classList.add('is-open');
-          document.body.style.overflow = 'hidden';
+      /* Build cards with openModal bound to this tab index */
+      (function (tiCapture, prefixCapture) {
+        function openModal(p, idx) { openSharedModal(tiCapture, p, idx); }
+        buildCards(reviews, carousel, modalBody, prefixCapture, openModal, isGoogle);
+        panel.querySelector('#' + prefixCapture + 'OpenAll').addEventListener('click', function () {
+          openSharedModal(tiCapture, prefixCapture, 0);
         });
-        modalTabBar.appendChild(btn);
-      });
+      })(ti, prefix);
+
+      updateBtns();
     });
 
-    /* Global Escape closes any open modal */
+    /* Global Escape */
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') overlays.forEach(function (o) {
-        o.classList.remove('is-open');
-        document.body.style.overflow = '';
-      });
+      if (e.key === 'Escape') closeSharedModal();
     });
 
-    /* ── Tab switching ── */
+    /* ── Main tab switching ── */
     var tabs = tabBar.querySelectorAll('.fgr-tab');
     tabs.forEach(function (tab, ti) {
       tab.addEventListener('click', function () {
