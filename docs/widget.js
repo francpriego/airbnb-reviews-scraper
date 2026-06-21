@@ -6,6 +6,7 @@
  *     src="https://francpriego.github.io/airbnb-reviews-scraper/widget.js"
  *     data-url="https://francpriego.github.io/airbnb-reviews-scraper/reviews.json"
  *     data-url2="https://francpriego.github.io/airbnb-reviews-scraper/reviews2.json"
+ *     data-url3="https://francpriego.github.io/airbnb-reviews-scraper/reviews3.json"
  *   ></script>
  */
 (function () {
@@ -14,6 +15,7 @@
   var scriptEl    = document.currentScript;
   var reviewsUrl  = (scriptEl && scriptEl.getAttribute('data-url'))  || 'reviews.json';
   var reviewsUrl2 = (scriptEl && scriptEl.getAttribute('data-url2')) || '';
+  var reviewsUrl3 = (scriptEl && scriptEl.getAttribute('data-url3')) || '';
 
   /* ── Inject CSS ──────────────────────────────────────────────────────────── */
   var CSS = `
@@ -190,7 +192,7 @@
     wrap.className = 'fgr-wrap';
 
     /* Tab labels */
-    var tabLabels = ['Guesthouse', 'Garden House'];
+    var tabLabels = ['Guesthouse', 'Garden House', 'Studio Unit'];
     var tabScores = datasets.map(function (d) { return d.score || '4.93'; });
     var tabCounts = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
 
@@ -344,10 +346,10 @@
   }
 
   /* ── Fetch one or two JSON files ─────────────────────────────────────────── */
-  var fetches = [fetch(reviewsUrl).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })];
-  if (reviewsUrl2) {
-    fetches.push(fetch(reviewsUrl2).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }));
-  }
+  function fetchJson(url) { return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }); }
+  var fetches = [fetchJson(reviewsUrl)];
+  if (reviewsUrl2) fetches.push(fetchJson(reviewsUrl2));
+  if (reviewsUrl3) fetches.push(fetchJson(reviewsUrl3));
 
   Promise.all(fetches)
     .then(function (datasets) {
