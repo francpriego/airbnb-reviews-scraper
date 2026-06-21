@@ -16,6 +16,7 @@
   var reviewsUrl  = (scriptEl && scriptEl.getAttribute('data-url'))  || 'reviews.json';
   var reviewsUrl2 = (scriptEl && scriptEl.getAttribute('data-url2')) || '';
   var reviewsUrl3 = (scriptEl && scriptEl.getAttribute('data-url3')) || '';
+  var reviewsUrl4 = (scriptEl && scriptEl.getAttribute('data-url4')) || '';
 
   /* ── Inject CSS ──────────────────────────────────────────────────────────── */
   var CSS = `
@@ -112,6 +113,8 @@
   /* ── SVGs / assets ───────────────────────────────────────────────────────── */
   var AIRBNB      = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo3.png" alt="Airbnb" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;flex-shrink:0">';
   var AIRBNB_LOGO = '<img src="https://felisa.franciscopriego.com/wp-content/uploads/2026/06/airbnblogo3.png" alt="Airbnb" style="height:36px;width:auto;object-fit:contain;flex-shrink:0">';
+  var GOOGLE_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" style="flex-shrink:0;vertical-align:middle"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+  var GOOGLE_LOGO = '<svg viewBox="0 0 74 24" width="74" height="24" style="flex-shrink:0"><path d="M9.24 8.19v2.46h5.88c-.18 1.38-.64 2.39-1.34 3.1-.86.86-2.2 1.8-4.54 1.8-3.62 0-6.45-2.92-6.45-6.54s2.83-6.54 6.45-6.54c1.95 0 3.38.77 4.43 1.76L15.4 2.5C13.94 1.08 11.98 0 9.24 0 4.28 0 .11 4.04.11 9s4.17 9 9.13 9c2.68 0 4.7-.88 6.28-2.52 1.62-1.62 2.13-3.91 2.13-5.75 0-.57-.04-1.1-.13-1.54H9.24z" fill="#4285F4"/><path d="M25 6.19c-3.21 0-5.83 2.44-5.83 5.81 0 3.34 2.62 5.81 5.83 5.81s5.83-2.46 5.83-5.81c0-3.37-2.62-5.81-5.83-5.81zm0 9.33c-1.76 0-3.28-1.45-3.28-3.52 0-2.09 1.52-3.52 3.28-3.52s3.28 1.43 3.28 3.52c0 2.07-1.52 3.52-3.28 3.52z" fill="#EA4335"/><path d="M53.58 7.49h-.09c-.57-.68-1.67-1.3-3.06-1.3C47.53 6.19 45 8.72 45 12c0 3.26 2.53 5.81 5.43 5.81 1.39 0 2.49-.62 3.06-1.32h.09v.83c0 2.22-1.19 3.41-3.1 3.41-1.56 0-2.53-1.12-2.93-2.07l-2.22.92c.64 1.54 2.33 3.43 5.15 3.43 2.99 0 5.52-1.76 5.52-6.05V6.49h-2.42v1zm-2.93 8.03c-1.76 0-3.1-1.5-3.1-3.52 0-2.05 1.34-3.52 3.1-3.52 1.74 0 3.1 1.49 3.1 3.54.01 2.03-1.36 3.5-3.1 3.5z" fill="#4285F4"/><path d="M38 6.19c-3.21 0-5.83 2.44-5.83 5.81 0 3.34 2.62 5.81 5.83 5.81s5.83-2.46 5.83-5.81c0-3.37-2.62-5.81-5.83-5.81zm0 9.33c-1.76 0-3.28-1.45-3.28-3.52 0-2.09 1.52-3.52 3.28-3.52s3.28 1.43 3.28 3.52c0 2.07-1.52 3.52-3.28 3.52z" fill="#34A853"/><path d="M58 .24h2.51v17.57H58z" fill="#FBBC05"/><path d="M68.28 15.52l1.95 1.3c-.63.93-2.15 2.52-4.78 2.52-3.26 0-5.7-2.52-5.7-5.81 0-3.46 2.46-5.81 5.42-5.81 2.98 0 4.44 2.39 4.92 3.68l.26.65-7.69 3.18c.59 1.15 1.5 1.74 2.79 1.74 1.29 0 2.19-.64 2.83-1.45zm-6.03-2.07l5.14-2.13c-.28-.72-1.13-1.22-2.13-1.22-1.28 0-3.06 1.13-3.01 3.35z" fill="#EA4335"/></svg>';
   var CHECK  = '<svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="10" fill="#2e7d32"/><path d="M5.5 10l3 3 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
   var CSTAR  = '<svg class="fgr-card-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
   var HSTAR  = '<svg class="fgr-star-y" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
@@ -124,7 +127,8 @@
   var COLORS = ['#2e7d32','#1f5c24','#388e3c','#2e7d32','#1a6b1e','#4caf50'];
 
   /* ── Build review cards + modal rows for one listing ─────────────────────── */
-  function buildCards(reviews, carousel, modalBody, prefix, openModal) {
+  function buildCards(reviews, carousel, modalBody, prefix, openModal, isGoogle) {
+    var badgeIcon = isGoogle ? GOOGLE_ICON : AIRBNB;
     reviews.forEach(function (r, i) {
       var color   = COLORS[i % COLORS.length];
       var initial = (r.name || '?').charAt(0).toUpperCase();
@@ -134,6 +138,7 @@
       var text    = r.text || '';
       var kids    = r.kids || false;
       var photo   = r.photo || '';
+      var stars   = Math.min(5, Math.max(1, parseInt(r.stars || r.rating || 5)));
 
       var cardAvatarHtml = photo
         ? '<img src="' + photo + '" alt="' + name + '">'
@@ -149,14 +154,14 @@
         '<div class="fgr-card-top">' +
           '<div class="fgr-avatar-wrap">' +
             cardAvatarHtml +
-            '<div class="fgr-avatar-badge">' + AIRBNB + '</div>' +
+            '<div class="fgr-avatar-badge">' + badgeIcon + '</div>' +
           '</div>' +
           '<div style="display:flex;flex-direction:column;gap:4px;justify-content:center">' +
             '<div class="fgr-reviewer-name" style="display:flex;align-items:center;gap:5px">' + name + CHECK + '</div>' +
             '<div class="fgr-reviewer-source">' + date + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="fgr-card-stars">' + CSTAR.repeat(5) + '</div>' +
+        '<div class="fgr-card-stars">' + CSTAR.repeat(stars) + '</div>' +
         '<p class="fgr-card-text">' + text + '</p>' +
         '<button class="fgr-read-more" data-idx="' + i + '" data-prefix="' + prefix + '">Read more</button>';
 
@@ -175,11 +180,11 @@
           modalAvatarHtml +
           '<div>' +
             '<div class="fgr-modal-name-row">' + name + CHECK + '</div>' +
-            '<div class="fgr-modal-meta">' + AIRBNB + (kids ? '👨‍👩‍👧 Stayed with kids · ' : '') + meta + '</div>' +
+            '<div class="fgr-modal-meta">' + badgeIcon + (kids ? '👨‍👩‍👧 Stayed with kids · ' : '') + meta + '</div>' +
             '<div class="fgr-modal-date">' + date + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="fgr-modal-review-stars">' + RSTAR.repeat(5) + '</div>' +
+        '<div class="fgr-modal-review-stars">' + RSTAR.repeat(stars) + '</div>' +
         '<p class="fgr-modal-review-text">' + text + '</p>';
 
       modalBody.appendChild(row);
@@ -192,17 +197,19 @@
     wrap.className = 'fgr-wrap';
 
     /* Tab labels */
-    var tabLabels = ['Guesthouse', 'Garden House', 'Both Houses'];
-    var tabScores = datasets.map(function (d) { return d.score || '4.93'; });
-    var tabCounts = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
+    var tabLabels  = ['Guesthouse', 'Garden House', 'Both Houses', "Felisa's Guesthouse"];
+    var tabSources = datasets.map(function (d) { return d.source || 'airbnb'; });
+    var tabScores  = datasets.map(function (d) { return d.score || '4.93'; });
+    var tabCounts  = datasets.map(function (d) { return (d.total_count || (d.reviews || []).length); });
 
     /* ── Tab bar ── */
     var tabBar = document.createElement('div');
     tabBar.className = 'fgr-tabs';
     datasets.forEach(function (d, ti) {
+      var icon = tabSources[ti] === 'google' ? GOOGLE_ICON : AIRBNB;
       var btn = document.createElement('button');
       btn.className = 'fgr-tab' + (ti === 0 ? ' is-active' : '');
-      btn.innerHTML = AIRBNB + ' ' + tabLabels[ti] + ' <strong style="margin-left:4px">' + tabScores[ti] + '</strong>';
+      btn.innerHTML = icon + ' ' + tabLabels[ti] + ' <strong style="margin-left:4px">' + tabScores[ti] + '</strong>';
       tabBar.appendChild(btn);
     });
     wrap.appendChild(tabBar);
@@ -219,6 +226,9 @@
       var listingUrl = data.listing    || '#';
       var score      = tabScores[ti];
       var prefix     = 'fgr' + ti + '_';
+      var isGoogle   = tabSources[ti] === 'google';
+      var tabIcon    = isGoogle ? GOOGLE_ICON : AIRBNB;
+      var headerLogo = isGoogle ? GOOGLE_LOGO : AIRBNB_LOGO;
 
       var panel = document.createElement('div');
       panel.className = 'fgr-panel' + (ti === 0 ? ' is-active' : '');
@@ -227,7 +237,7 @@
       panel.innerHTML =
         '<div class="fgr-header">' +
           '<div>' +
-            '<div class="fgr-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
+            '<div class="fgr-brand">' + headerLogo + ' Reviews</div>' +
             '<div class="fgr-score-row">' +
               '<span class="fgr-score-big">' + score + '</span>' +
               '<div class="fgr-stars-yellow">' + HSTAR.repeat(5) + '</div>' +
@@ -247,13 +257,13 @@
           '<div class="fgr-modal">' +
             '<div class="fgr-modal-topbar">' +
               '<div class="fgr-modal-tabs">' +
-                '<button class="fgr-modal-tab is-active">' + AIRBNB + ' ' + tabLabels[ti] + ' <strong>' + score + '</strong></button>' +
+                '<button class="fgr-modal-tab is-active">' + tabIcon + ' ' + tabLabels[ti] + ' <strong>' + score + '</strong></button>' +
               '</div>' +
               '<button class="fgr-modal-icon-btn" id="' + prefix + 'Close2" aria-label="Close">&#10005;</button>' +
             '</div>' +
             '<div class="fgr-modal-header">' +
               '<div>' +
-                '<div class="fgr-modal-brand">' + AIRBNB_LOGO + ' Reviews</div>' +
+                '<div class="fgr-modal-brand">' + headerLogo + ' Reviews</div>' +
                 '<div class="fgr-modal-score-row">' +
                   '<span class="fgr-modal-score-big">' + score + '</span>' +
                   '<div class="fgr-modal-stars">' + MSTAR.repeat(5) + '</div>' +
@@ -307,7 +317,7 @@
         document.body.style.overflow = '';
       }
 
-      buildCards(reviews, carousel, modalBody, prefix, openModal);
+      buildCards(reviews, carousel, modalBody, prefix, openModal, isGoogle);
       updateBtns();
 
       panel.querySelector('#' + prefix + 'OpenAll').addEventListener('click', function () { openModal(prefix, 0); });
@@ -353,6 +363,7 @@
   var fetches = [fetchJson(reviewsUrl)];
   if (reviewsUrl2) fetches.push(fetchJson(reviewsUrl2));
   if (reviewsUrl3) fetches.push(fetchJson(reviewsUrl3));
+  if (reviewsUrl4) fetches.push(fetchJson(reviewsUrl4));
 
   Promise.all(fetches)
     .then(function (datasets) {
