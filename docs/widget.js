@@ -45,7 +45,7 @@
 .fgr-nav svg{width:26px;height:26px;stroke:#333;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .fgr-nav-prev{left:0}.fgr-nav-next{right:0}
 .fgr-nav:disabled{opacity:.35;cursor:default}
-.fgr-card{flex:0 0 280px;background:#fff;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.fgr-card{flex:0 0 280px;background:#f5f5f5;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;border:1px solid #e8e8e8}
 .fgr-card-top{display:flex;align-items:center;gap:14px}
 .fgr-avatar-wrap{position:relative;flex-shrink:0;width:56px;height:56px}
 .fgr-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
