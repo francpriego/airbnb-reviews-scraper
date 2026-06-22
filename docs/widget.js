@@ -378,9 +378,7 @@
               '<span class="fgr-review-count">(' + totalCount + ')</span>' +
             '</div>' +
           '</div>' +
-          (tabSources[ti] === 'all'
-            ? '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>'
-            : '<button class="fgr-action-btn" id="' + prefix + 'OpenAll">Read all ' + totalCount + ' reviews</button>') +
+          '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>' +
         '</div>' +
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
