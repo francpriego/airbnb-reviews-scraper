@@ -466,9 +466,7 @@
               '<span class="fgr-review-count">(' + totalCount + ')</span>' +
             '</div>' +
           '</div>' +
-          (tabSources[ti] === 'all'
-            ? '<button class="fgr-action-btn" id="' + prefix + 'WriteReview">Write A Review</button>'
-            : '<a class="fgr-action-btn" href="' + (allDataset.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>') +
+          '<a class="fgr-action-btn" href="' + (allDataset.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>' +
         '</div>' +
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
@@ -502,12 +500,6 @@
       (function (tiCapture, prefixCapture, srcCapture) {
         function openModal(p, idx) { openSharedModal(tiCapture, p, idx); }
         buildCards(reviews, carousel, modalBody, prefixCapture, openModal, isGoogle);
-        if (srcCapture === 'all') {
-          panel.querySelector('#' + prefixCapture + 'WriteReview').addEventListener('click', function() {
-            wrOverlay.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-          });
-        }
       })(ti, prefix, tabSources[ti]);
 
       updateBtns();
