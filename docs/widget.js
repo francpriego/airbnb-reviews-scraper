@@ -37,7 +37,7 @@
 .fgr-review-count{font-size:15px;color:#888;font-weight:400}
 .fgr-action-btn{display:inline-flex;align-items:center;background:#2e7d32;color:#fff!important;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.04em;padding:12px 24px;border-radius:8px;text-decoration:none!important;white-space:nowrap;transition:background .18s;flex-shrink:0;border:none!important;cursor:pointer;box-shadow:none!important}
 .fgr-action-btn:hover,.fgr-action-btn:focus,.fgr-action-btn:active{background:#1f5c24!important;color:#fff!important;box-shadow:none!important}
-.fgr-carousel-outer{position:relative;padding:0 56px}
+.fgr-carousel-outer{position:relative;padding:0 56px;overflow:hidden}
 .fgr-carousel{display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 2px 8px}
 .fgr-carousel::-webkit-scrollbar{display:none}
 .fgr-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:box-shadow .18s,background .18s}
