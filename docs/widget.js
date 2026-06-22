@@ -409,15 +409,10 @@
       _io.observe(carousel);
 
       /* Build cards with openModal bound to this tab index */
-      (function (tiCapture, prefixCapture, srcCapture) {
+      (function (tiCapture, prefixCapture) {
         function openModal(p, idx) { openSharedModal(tiCapture, p, idx); }
         buildCards(reviews, carousel, modalBody, prefixCapture, openModal, isGoogle);
-        if (srcCapture !== 'all') {
-          panel.querySelector('#' + prefixCapture + 'OpenAll').addEventListener('click', function () {
-            openSharedModal(tiCapture, prefixCapture, 0);
-          });
-        }
-      })(ti, prefix, tabSources[ti]);
+      })(ti, prefix);
 
       updateBtns();
     });
