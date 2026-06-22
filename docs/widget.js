@@ -77,10 +77,10 @@
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
 .fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:color .18s}
-.fgr-modal-tab:hover{color:#111}
-.fgr-modal-tab.is-active{color:#111;border-bottom-color:#111;font-weight:700}
-.fgr-modal-nav{width:30px;height:30px;min-width:30px;border-radius:50%;background:#fff;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .18s;padding:0;position:static;transform:none;box-shadow:none}
-.fgr-modal-nav:hover{background:#f5f5f5}
+.fgr-modal-tab:hover{color:#111;background:#f0f0f0!important;border-radius:6px}
+.fgr-modal-tab.is-active{color:#111!important;background:#e8e8e8!important;border-bottom-color:#111;font-weight:700;border-radius:6px}
+.fgr-modal-nav{width:30px;height:30px;min-width:30px;border-radius:50%;background:#fff!important;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .18s;padding:0;position:static;transform:none;box-shadow:none}
+.fgr-modal-nav:hover{background:#e8e8e8!important}
 .fgr-modal-nav svg{width:14px!important;height:14px!important;stroke:#555!important;fill:none!important;stroke-width:2.5!important;stroke-linecap:round!important;stroke-linejoin:round!important}
 .fgr-modal-nav:disabled{opacity:.3;cursor:default}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
