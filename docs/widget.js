@@ -99,6 +99,16 @@
 .fgr-modal-review-star{width:14px;height:14px;fill:#FFB800}
 .fgr-modal-review-text{font-size:13.5px;font-weight:300;line-height:1.7;color:#333}
 
+/* ── Write-review modal ── */
+.fgr-wr-title{font-size:20px;font-weight:700;color:#111;text-align:center;padding:24px 24px 20px;border-bottom:1px solid #f0f0f0;flex-shrink:0}
+.fgr-wr-body{padding:20px 24px 28px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.fgr-wr-link{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:#f5f5f5;border:1px solid #e8e8e8;text-decoration:none!important;color:#111!important;transition:background .18s,box-shadow .18s;cursor:pointer}
+.fgr-wr-link:hover{background:#eaf3ed;box-shadow:0 2px 8px rgba(45,122,79,.15)}
+.fgr-wr-link-icon{width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.fgr-wr-link-text{display:flex;flex-direction:column;gap:2px}
+.fgr-wr-link-name{font-size:14px;font-weight:700;color:#111}
+.fgr-wr-link-sub{font-size:12px;color:#888}
+
 @media(max-width:640px){
   .fgr-tabs{padding:0 16px}.fgr-header{padding:20px 16px 18px}
   .fgr-carousel-outer{padding:0 16px}.fgr-card{flex:0 0 240px}.fgr-nav{display:none}
@@ -316,6 +326,56 @@
     sharedOverlay.appendChild(modalWrap);
     wrap.appendChild(sharedOverlay);
 
+    /* ── Write-review overlay (All Reviews tab) ── */
+    var wrOverlay = document.createElement('div');
+    wrOverlay.className = 'fgr-overlay';
+    var wrWrap = document.createElement('div');
+    wrWrap.className = 'fgr-modal-wrap';
+    wrWrap.style.maxWidth = '420px';
+    var wrCloseBtn = document.createElement('button');
+    wrCloseBtn.className = 'fgr-modal-close-btn';
+    wrCloseBtn.innerHTML = '&times;';
+    var wrModal = document.createElement('div');
+    wrModal.className = 'fgr-modal';
+    var wrTitle = document.createElement('div');
+    wrTitle.className = 'fgr-wr-title';
+    wrTitle.textContent = 'Write a Review';
+    var wrBody = document.createElement('div');
+    wrBody.className = 'fgr-wr-body';
+    // Build one link per original dataset (before 'all' was prepended)
+    var wrPlatforms = [
+      { label: 'Review us on Google', src: 'google', listing: datasets[4] && datasets[4].listing },
+      { label: 'Review us on Airbnb', sub: 'Guesthouse · airbnb.com/rooms/17517160', src: 'airbnb', listing: datasets[1] && datasets[1].listing },
+      { label: 'Review us on Airbnb', sub: 'Garden House · airbnb.com/rooms/37967370', src: 'airbnb', listing: datasets[2] && datasets[2].listing },
+      { label: 'Review us on Airbnb', sub: 'Both Houses · airbnb.com/rooms/37969234', src: 'airbnb', listing: datasets[3] && datasets[3].listing }
+    ];
+    var GOOGLE_CIRCLE_ICON = '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+    var AIRBNB_CIRCLE_ICON = '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 1C5.373 1 0 6.373 0 13c0 4.755 2.64 8.9 6.538 11.06L12 23l5.462 1.06C21.36 21.9 24 17.755 24 13 24 6.373 18.627 1 12 1z" fill="#FF5A5F"/><path d="M12 6.5c-1.06 0-2 .55-2.5 1.38C9 8.67 9 9.18 9.17 9.67c.52 1.5 2.5 3.5 2.83 3.83.33-.33 2.31-2.33 2.83-3.83.17-.49.17-1 -.33-1.79C14 7.05 13.06 6.5 12 6.5zm0 9.5c-1.5 0-4.5-1.17-5.5-2.83-.5-.83-.5-1.84 0-2.67.33-.5.83-.83 1.33-1 .67 1.83 2.5 3.5 4.17 4.33 1.67-.83 3.5-2.5 4.17-4.33.5.17 1 .5 1.33 1 .5.83.5 1.84 0 2.67C16.5 14.83 13.5 16 12 16z" fill="#fff"/></svg>';
+    wrPlatforms.forEach(function(p) {
+      var a = document.createElement('a');
+      a.className = 'fgr-wr-link';
+      a.href = p.listing || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var icon = p.src === 'google' ? GOOGLE_CIRCLE_ICON : AIRBNB_CIRCLE_ICON;
+      var subHtml = p.sub ? '<div class="fgr-wr-link-sub">' + p.sub + '</div>' : '';
+      a.innerHTML =
+        '<div class="fgr-wr-link-icon">' + icon + '</div>' +
+        '<div class="fgr-wr-link-text">' +
+          '<div class="fgr-wr-link-name">' + p.label + '</div>' +
+          subHtml +
+        '</div>';
+      wrBody.appendChild(a);
+    });
+    wrModal.appendChild(wrTitle);
+    wrModal.appendChild(wrBody);
+    wrWrap.appendChild(wrCloseBtn);
+    wrWrap.appendChild(wrModal);
+    wrOverlay.appendChild(wrWrap);
+    wrap.appendChild(wrOverlay);
+    wrCloseBtn.addEventListener('click', function() { wrOverlay.classList.remove('is-open'); document.body.style.overflow = ''; });
+    wrOverlay.addEventListener('click', function(e) { if (e.target === wrOverlay) { wrOverlay.classList.remove('is-open'); document.body.style.overflow = ''; } });
+
     /* switchModalTab: swap content & active tab button */
     function switchModalTab(ti) {
       modalTabBtns.forEach(function (b, i) { b.classList.toggle('is-active', i === ti); });
@@ -378,7 +438,9 @@
               '<span class="fgr-review-count">(' + totalCount + ')</span>' +
             '</div>' +
           '</div>' +
-          '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>' +
+          (tabSources[ti] === 'all'
+            ? '<button class="fgr-action-btn" id="' + prefix + 'WriteReview">Write A Review</button>'
+            : '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>') +
         '</div>' +
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
@@ -409,10 +471,16 @@
       _io.observe(carousel);
 
       /* Build cards with openModal bound to this tab index */
-      (function (tiCapture, prefixCapture) {
+      (function (tiCapture, prefixCapture, srcCapture) {
         function openModal(p, idx) { openSharedModal(tiCapture, p, idx); }
         buildCards(reviews, carousel, modalBody, prefixCapture, openModal, isGoogle);
-      })(ti, prefix);
+        if (srcCapture === 'all') {
+          panel.querySelector('#' + prefixCapture + 'WriteReview').addEventListener('click', function() {
+            wrOverlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+      })(ti, prefix, tabSources[ti]);
 
       updateBtns();
     });
