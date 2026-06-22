@@ -398,7 +398,12 @@
 
     /* switchModalTab: swap content & active tab button */
     function switchModalTab(ti) {
-      modalTabBtns.forEach(function (b, i) { b.classList.toggle('is-active', i === ti); });
+      modalTabBtns.forEach(function (b, i) {
+        b.classList.toggle('is-active', i === ti);
+        b.style.background = i === ti ? '#e8e8e8' : '';
+        b.style.color = i === ti ? '#111' : '';
+        b.style.borderRadius = i === ti ? '6px' : '';
+      });
       contentDivs.forEach(function (c, i) { c.style.display = i === ti ? 'flex' : 'none'; });
     }
 
