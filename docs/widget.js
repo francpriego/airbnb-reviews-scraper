@@ -76,9 +76,13 @@
 .fgr-modal-topbar{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #e8e8e8;flex-shrink:0}
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
-.fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:8px 12px;font-family:inherit;font-size:12px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.fgr-modal-tab:hover{color:#fff;background:#2d7a4f;border-radius:6px}
-.fgr-modal-tab.is-active{color:#fff;background:#2d7a4f;border-bottom-color:#2d7a4f;font-weight:700;border-radius:6px}
+.fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:color .18s}
+.fgr-modal-tab:hover{color:#111}
+.fgr-modal-tab.is-active{color:#111;border-bottom-color:#111;font-weight:700}
+.fgr-modal-nav{width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .18s}
+.fgr-modal-nav:hover{background:#f5f5f5}
+.fgr-modal-nav svg{width:16px;height:16px;stroke:#555;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.fgr-modal-nav:disabled{opacity:.3;cursor:default}
 .fgr-modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 16px;flex-shrink:0;gap:12px;flex-wrap:wrap;border-bottom:1px solid #f0f0f0}
 .fgr-modal-brand{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:800;color:#111;margin-bottom:10px;letter-spacing:-.01em}
 .fgr-modal-score-row{display:flex;align-items:center;gap:10px}
@@ -282,7 +286,24 @@
       modalTabsEl.appendChild(btn);
     });
 
+    var modalNavPrev = document.createElement('button');
+    modalNavPrev.className = 'fgr-modal-nav';
+    modalNavPrev.innerHTML = PREV;
+    var modalNavNext = document.createElement('button');
+    modalNavNext.className = 'fgr-modal-nav';
+    modalNavNext.innerHTML = NEXT;
+    function updateModalNavBtns() {
+      modalNavPrev.disabled = modalTabsEl.scrollLeft <= 4;
+      modalNavNext.disabled = modalTabsEl.scrollLeft >= modalTabsEl.scrollWidth - modalTabsEl.clientWidth - 4;
+    }
+    modalNavPrev.addEventListener('click', function() { modalTabsEl.scrollBy({ left: -120, behavior: 'smooth' }); });
+    modalNavNext.addEventListener('click', function() { modalTabsEl.scrollBy({ left: 120, behavior: 'smooth' }); });
+    modalTabsEl.addEventListener('scroll', updateModalNavBtns);
+    setTimeout(updateModalNavBtns, 100);
+
+    modalTopbar.appendChild(modalNavPrev);
     modalTopbar.appendChild(modalTabsEl);
+    modalTopbar.appendChild(modalNavNext);
     sharedModal.appendChild(modalTopbar);
 
     /* One content div per dataset */
