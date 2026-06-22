@@ -73,7 +73,7 @@
 @keyframes fgrSlideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
 .fgr-modal-close-btn{position:absolute;top:-18px;right:-18px;width:40px;height:40px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;font-size:18px;color:#444;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:background .18s,color .18s;z-index:1}
 .fgr-modal-close-btn:hover{background:#2d7a4f;color:#fff}
-.fgr-modal-topbar{display:flex;align-items:center;padding:8px 12px;border-bottom:1px solid #e8e8e8;flex-shrink:0;gap:6px}
+.fgr-modal-topbar{display:flex;align-items:center;padding:16px 12px 8px;border-bottom:1px solid #e8e8e8;flex-shrink:0;gap:6px}
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
 .fgr-modal-tabs::-webkit-scrollbar{display:none}
 .fgr-modal-tab{display:flex;align-items:center;gap:6px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:500;color:#888;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:color .18s}
