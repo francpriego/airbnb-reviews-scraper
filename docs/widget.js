@@ -468,7 +468,7 @@
           '</div>' +
           (tabSources[ti] === 'all'
             ? '<button class="fgr-action-btn" id="' + prefix + 'WriteReview">Write A Review</button>'
-            : '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>') +
+            : '<a class="fgr-action-btn" href="' + (allDataset.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>') +
         '</div>' +
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
