@@ -523,16 +523,19 @@
     });
 
     /* ── Fit carousels to show only whole cards ─── */
+    var _cachedCarouselWidth = 0;
     function fitCarousels() {
-      wrap.querySelectorAll('.fgr-carousel-outer').forEach(function(outer) {
-        var carousel = outer.querySelector('.fgr-carousel');
-        if (!carousel) return;
-        var navPad = window.innerWidth <= 640 ? 32 : 112; /* 2×nav button area */
-        var available = outer.offsetWidth - navPad;
-        var cardW = window.innerWidth <= 640 ? 240 : 280;
-        var gap = 16;
-        var count = Math.max(1, Math.floor((available + gap) / (cardW + gap)));
-        carousel.style.width = (count * cardW + (count - 1) * gap) + 'px';
+      var navPad = window.innerWidth <= 640 ? 32 : 112;
+      var cardW  = window.innerWidth <= 640 ? 240 : 280;
+      var gap    = 16;
+      /* Use wrap width as reference since inactive panels have offsetWidth 0 */
+      var wrapW  = wrap.offsetWidth || wrap.getBoundingClientRect().width || 0;
+      var available = wrapW - navPad;
+      if (available <= 0) return;
+      var count = Math.max(1, Math.floor((available + gap) / (cardW + gap)));
+      _cachedCarouselWidth = count * cardW + (count - 1) * gap;
+      wrap.querySelectorAll('.fgr-carousel').forEach(function(c) {
+        c.style.width = _cachedCarouselWidth + 'px';
       });
     }
     var fitTimer;
