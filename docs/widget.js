@@ -71,7 +71,7 @@
 .fgr-modal-wrap{position:relative;width:100%;max-width:620px}
 .fgr-modal{background:#fff;border-radius:16px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:fgrSlideUp .25s ease}
 @keyframes fgrSlideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-.fgr-modal-close-btn{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;font-size:16px;color:#444;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:background .18s,color .18s;z-index:1}
+.fgr-modal-close-btn{position:absolute;top:-52px;right:0;width:40px;height:40px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;font-size:18px;color:#444;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:background .18s,color .18s;z-index:1}
 .fgr-modal-close-btn:hover{background:#2d7a4f;color:#fff}
 .fgr-modal-topbar{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #e8e8e8;flex-shrink:0}
 .fgr-modal-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1}
@@ -299,7 +299,6 @@
     modalNavPrev.addEventListener('click', function() { modalTabsEl.scrollBy({ left: -120, behavior: 'smooth' }); });
     modalNavNext.addEventListener('click', function() { modalTabsEl.scrollBy({ left: 120, behavior: 'smooth' }); });
     modalTabsEl.addEventListener('scroll', updateModalNavBtns);
-    setTimeout(updateModalNavBtns, 100);
 
     modalTopbar.appendChild(modalNavPrev);
     modalTopbar.appendChild(modalTabsEl);
@@ -406,6 +405,7 @@
     function openSharedModal(tabIndex, reviewPrefix, reviewIdx) {
       switchModalTab(tabIndex);
       sharedOverlay.classList.add('is-open');
+      setTimeout(updateModalNavBtns, 50);
       document.body.style.overflow = 'hidden';
       setTimeout(function () {
         if (reviewIdx !== null && reviewIdx !== undefined) {
