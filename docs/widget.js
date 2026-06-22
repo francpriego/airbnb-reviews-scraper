@@ -221,7 +221,8 @@
     var totalStars = 0;
     allReviews.forEach(function (r) { totalStars += Math.min(5, Math.max(1, parseInt(r.stars || r.rating || 5))); });
     var allScore = allReviews.length ? (totalStars / allReviews.length).toFixed(1) : '5.0';
-    var allDataset = { source: 'all', listing: '#', score: allScore, reviews: allReviews };
+    var googleDs = datasets.filter(function(d){ return (d.source||'airbnb')==='google'; })[0];
+    var allDataset = { source: 'all', listing: googleDs ? googleDs.listing : '#', score: allScore, reviews: allReviews };
     var allDatasets = [allDataset].concat(datasets);
 
     /* Tab labels */
@@ -377,7 +378,9 @@
               '<span class="fgr-review-count">(' + totalCount + ')</span>' +
             '</div>' +
           '</div>' +
-          '<button class="fgr-action-btn" id="' + prefix + 'OpenAll">Read all ' + totalCount + ' reviews</button>' +
+          (tabSources[ti] === 'all'
+            ? '<a class="fgr-action-btn" href="' + (data.listing || '#') + '" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Write A Review</a>'
+            : '<button class="fgr-action-btn" id="' + prefix + 'OpenAll">Read all ' + totalCount + ' reviews</button>') +
         '</div>' +
         '<div class="fgr-carousel-outer">' +
           '<button class="fgr-nav fgr-nav-prev" id="' + prefix + 'Prev" aria-label="Previous">' + PREV + '</button>' +
@@ -408,13 +411,15 @@
       _io.observe(carousel);
 
       /* Build cards with openModal bound to this tab index */
-      (function (tiCapture, prefixCapture) {
+      (function (tiCapture, prefixCapture, srcCapture) {
         function openModal(p, idx) { openSharedModal(tiCapture, p, idx); }
         buildCards(reviews, carousel, modalBody, prefixCapture, openModal, isGoogle);
-        panel.querySelector('#' + prefixCapture + 'OpenAll').addEventListener('click', function () {
-          openSharedModal(tiCapture, prefixCapture, 0);
-        });
-      })(ti, prefix);
+        if (srcCapture !== 'all') {
+          panel.querySelector('#' + prefixCapture + 'OpenAll').addEventListener('click', function () {
+            openSharedModal(tiCapture, prefixCapture, 0);
+          });
+        }
+      })(ti, prefix, tabSources[ti]);
 
       updateBtns();
     });
